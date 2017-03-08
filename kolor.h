@@ -52,5 +52,6 @@ public:
 };
 
 std::ostream& operator << (std::ostream& wyj, Kolor const &arg);
+std::istream& operator >> (std::istream &wej, Kolor &arg);
 
 #endif // ! KOLOR

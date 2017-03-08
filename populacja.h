@@ -5,30 +5,37 @@
 
 class populacja
 {
-	osobnik** osob;				//tablica wszystkich osobnikow
+	osobnik** osobniki;
 
 	//zmienne do kontroli populacji
-	unsigned lpopulacji;		//liczebnosc populacji
-	unsigned rozmiar_ciagu;		//dlugosc ciagu kodowego danego osobnika
-	double prawd_mutacji;		//w procentach:  1 to wartosc 1%, czyli tak na prawde 0.01
+	unsigned rozm_populacji;
+	unsigned rozmiar_ciagu;
+	double prawd_mutacji;		//w procentach:  1 to 1% = 0.01
 	double prawd_krzyzowania;	//normalny ulamek
+	double* prawd_wybrania; //tablica do realizacji losowania
 
 	//statystyki
 	double suma;					//suma wszystkich przystosowan
-	double srednie_przystosowanie;	//srednie przystosowanie wystepujace w populacji
-	double max_przystosowanie;		//maksymalne przysosowanie wystepujace w populacji
-	double min_przystosowanie;		//minimalne przystosowanie wystpujace w populacji
+	double srednie_przystosowanie;
+	double max_przystosowanie;
+	double min_przystosowanie;
+
+	//tworzenie nowej populacji
+	osobnik** nowa;
+	void selekcja_elitarna();
+	void krzyzuj();
+	void mutuj();
+	void nowa_tablica_inicjalizuj();
+	void losuj_nowych_osobnikow();
 public:
-	void nowa_populacja();		//tworzy nowa populacje na podstawie obecnej
-	void krzyzuj(); 			//krzyzuje ze soba osbniki po kolei
-	void mutuj();				//mutuje wszystkie osobniki
-	void wyswietl() const;		//wyswietla populacje
-	void raport() const;		//raport o statystykach populacji
-	void skaluj();				//skalowanie przystosowan, zapewnia lepsza zbieznosc
-	void statystyki();			//oblicza wszystkie statystyki
-	void oblicz_przystosowania(); //oblicza aktualne przystosowania populacji
-	void reinicjalizuj();		//reinicjalizuje wszystkich osbnikow
-	void skaluj_przystosowania();
+	void nowa_populacja();
+	void wyswietl() const;
+	void wyswietl_statystyki() const;		//raport o statystykach populacji
+	void oblicz_statystyki();
+	void oblicz_przystosowania();
+	void nieujemne_przystosowania();
+	void reinicjalizuj();
+
 
 	//wybrani osobnicy
 	osobnik *najlepszy;

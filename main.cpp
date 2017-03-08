@@ -65,89 +65,43 @@ int main()
 
 	const unsigned short dlugosc_ciagu = 6;		//dlugosc ciagu do odganidniecia
 	unsigned ilosc_poprawnych, ilosc_poprawnych_miejsc;
-	populacja pop(20, dlugosc_ciagu, 4, 0.4); //0.4, 0.4
+	populacja pop(20, dlugosc_ciagu, 4, 0.4);
 	Kolor *kod; Kolor *proba;
 
 
 	kod = new Kolor[dlugosc_ciagu];
 	proba = new Kolor[dlugosc_ciagu];
 
-	//do
-	//{
-		/*Wczytujemy 6-cio elementowy kod, skladajacy sie z mozliwe_opcje mozliwych liter*/
-		cout << "Podaj kod, zlozony z 6 kolorow od 0 do 8" << endl;
-		//cin >> kod;
-		for (unsigned i = 0; i < dlugosc_ciagu; i++)
-			kod[i].kol = static_cast<kolor>(0); //static_cast<kolor>(i);
-
-		for (unsigned i = 0; i < dlugosc_ciagu; i++)
-			if (kod[i].kol < 0 || kod[i].kol > ILOSC_DOSTEPNYCH - 1)
-				cout << "Podales zly kod koloru!" << endl;
-	//} while (kod.length() != dlugosc_ciagu);
+	cout << "Podaj kod, zlozony z 6 kolorow od 0 do 8" << endl;
+	/*
+	for (unsigned i = 0; i < dlugosc_ciagu; i++)
+	{
+		do
+		{
+			cin >> kod[i];
+		} while(kod[i].kol < 0 || kod[i].kol > ILOSC_DOSTEPNYCH - 1);
+	}*/
+	for (unsigned i = 0; i < dlugosc_ciagu; i++)
+		kod[i] = 0;
 
 	//gra przechodzi do drugiego gracza
 	cout << endl << "Odgadnij ciag podany wczesniej:" << endl;
 
-	//czlowiek
-	/*do
-	{
-		cin >> proba;
-		if (proba.length() != dlugosc_ciagu)
-			continue;
-		for (unsigned i = 0; i < kod.length(); i++)
-			if (kod[i] < 97 || kod[i] > 97 + mozliwe_opcje-1)
-				continue;
-
-		sprawdz(kod, proba, ilosc_poprawnych, ilosc_poprawnych_miejsc);
-		cout << endl << "Ilosc poprawnych: " << ilosc_poprawnych << endl << "Ilosc na dobrych miejscach: " << ilosc_poprawnych_miejsc << endl << endl;
-
-		poprzednie.push_back(proba);
-		poprzednie_dobre.push_back(ilosc_poprawnych);
-		poprzednie_miejsca.push_back(ilosc_poprawnych_miejsc);
-
-		cout << "Poprzednie podane propozycje: " << endl;
-		for (poprzednie.it = poprzednie.begin(), poprzednie_dobre.it = poprzednie_dobre.begin(), poprzednie_miejsca.it = poprzednie_miejsca.begin();
-			 poprzednie.it != NULL;
-			 poprzednie.przesun_it(), poprzednie_dobre.przesun_it(), poprzednie_miejsca.przesun_it())
-			cout << poprzednie.it->get_zaw() << "\t" << poprzednie_dobre.it->get_zaw() << "\t" << poprzednie_miejsca.it->get_zaw() << endl;
-	} while (ilosc_poprawnych != dlugosc_ciagu);*/
-
-	//AI
-
-	//na poczatek trzeba zagrac ta losowa kombinacja, zeby bylo na czym pracowac
-	/*for (unsigned i = 0; i < dlugosc_ciagu; i++)
-		proba[i] = rand() % ILOSC_DOSTEPNYCH;
-	sprawdz(kod, proba, dlugosc_ciagu, (unsigned)ilosc_poprawnych, (unsigned)ilosc_poprawnych_miejsc);
-	poprzednie.push_back(proba);
-	poprzednie_dobre.push_back(ilosc_poprawnych);
-	poprzednie_miejsca.push_back(ilosc_poprawnych_miejsc);*/
-
 	cout << "Podane propozycje: " << endl;
 
-//	unsigned licznik;
 	do
 	{
-		//tworzymy osobnika z najlepszym zagraniem
-	//	licznik = 0;
-		//do
-		//{
-			//pop.wyswietl();
 			pop.nowa_populacja();
-			pop.statystyki(); //obliczenie statystyk dla ostaniej powstalej populacji
+			cout << "test" << endl;
+			pop.oblicz_statystyki();
+			cout << "test" << endl;
 			//pop.wyswietl();
-			//getch();
-			/*licznik++;
-			if (licznik > 20)
-			{
-				pop.reinicjalizuj();
-				licznik = 0;
-			}
-		}  while (pop.najlepszy->get_przystosowanie() < 12 * poprzednie.size());*/
 
 		proba = new Kolor[dlugosc_ciagu];
+		cout << "test" << endl;
 		for (unsigned i = 0; i < dlugosc_ciagu; i++) //iteracja po kazdym kolorze
 			proba[i] = (*pop.najlepszy)[i];
-
+		cout << "test" << endl;
 		sprawdz(kod, proba, dlugosc_ciagu, ilosc_poprawnych, ilosc_poprawnych_miejsc);
 		//cout << endl << "Ilosc poprawnych: " << ilosc_poprawnych << endl << "Ilosc na dobrych miejscach: " << ilosc_poprawnych_miejsc << endl << endl;
 
