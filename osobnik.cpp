@@ -11,16 +11,14 @@ using namespace std;
 extern list<Kolor *> poprzednie;
 extern list<unsigned> poprzednie_dobre, poprzednie_miejsca;
 
-//odkodowuje wartosc z ciagu znakow
+
 double osobnik::odkoduj()
-{	
-	//obliczenie odleglosci od poprzednio podanych kombinacji
+{
 	int odleglosc = 0;
 	unsigned dobre_miejsce, dobry_kolor;
-	//iteracja po listach ciagow i ich info zwrotnych
+
 	list<unsigned>::iterator it1 = poprzednie_dobre.begin();
 	list<unsigned>::iterator it2 = poprzednie_miejsca.begin();
-	//czy tutaj nie powinna byæ sprawdzana odleg³oœæ do wszystkich poprzednich propozycji ??????
 	for (list<Kolor *>::iterator it = poprzednie.begin(); it != poprzednie.end(); it++, it1++, it2++)
 	{
 		sprawdz(*it, allele, rozmiar, dobre_miejsce, dobry_kolor);
@@ -29,7 +27,6 @@ double osobnik::odkoduj()
 	return odleglosc;
 }
 
-//oblicza przystosowanie pojedynczego osobnika
 double osobnik::oblicz_przystosowanie()
 {
 	return przystosowanie = odkoduj();
@@ -78,4 +75,3 @@ osobnik::osobnik(unsigned rozmiar_ciagu) : rozmiar(rozmiar_ciagu)
 	else
 		std::cerr << "Osobnik: konstrutor: nie mozna przydzielic pamieci!" << std::endl;
 }
-

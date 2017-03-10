@@ -1,6 +1,3 @@
-//klasa opisujaca stany w jakich mozne znalezc sie pojedynczy gen osobnika
-//w tym zagadnieniu jest w zasadzie zbedna, ale zaimplementowana zeby latwiej bylo rozwijac kod
-
 #ifndef  KOLOR
 #define KOLOR
 

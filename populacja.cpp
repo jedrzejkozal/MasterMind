@@ -139,10 +139,10 @@ void populacja::mutuj()
 
 void populacja::nowa_populacja()
 {
-	prawd_wybrania = new double[rozm_populacji/2];
 	oblicz_przystosowania();
 	nieujemne_przystosowania();
 	oblicz_statystyki();
+	selekcja_elitarna();
 	//wyswietl_statystyki();
 	nowa_tablica_inicjalizuj();
 	losuj_nowych_osobnikow();
