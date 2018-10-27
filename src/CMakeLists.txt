@@ -8,10 +8,10 @@ set (PROJECT_SOURCE_DIR ..)
 set (TEST_FILES_DIR ./test)
 
 set(SOURCE_FILES
-  ${PROJECT_SOURCE_DIR}/kolor.cpp
-  ${PROJECT_SOURCE_DIR}/ocena.cpp
-  ${PROJECT_SOURCE_DIR}/osobnik.cpp
-  ${PROJECT_SOURCE_DIR}/populacja.cpp
+  ${PROJECT_SOURCE_DIR}/Color.cpp
+  ${PROJECT_SOURCE_DIR}/Grade.cpp
+  ${PROJECT_SOURCE_DIR}/Individual.cpp
+  ${PROJECT_SOURCE_DIR}/Population.cpp
 )
 
 set(TESTS_FILES

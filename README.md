@@ -1,2 +1,2 @@
 # MasterMind
-Algorytm genetyczny grający w Master Mind
+Genetic algorithm playing Master Mind

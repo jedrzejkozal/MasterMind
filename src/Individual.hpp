@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#include "kolor.hpp"
+#include "Color.hpp"
 
 
 //osobnik

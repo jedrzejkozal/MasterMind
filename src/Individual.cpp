@@ -2,8 +2,8 @@
 #include <cstdlib>
 #include <math.h>
 
-#include "osobnik.hpp"
-#include "zmienne_globalne.hpp"
+#include "Individual.hpp"
+#include "globals.hpp"
 
 
 using namespace std;

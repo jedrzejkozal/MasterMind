@@ -6,8 +6,8 @@
 #include <termios.h>
 
 
-#include "populacja.hpp"
-#include "zmienne_globalne.hpp"
+#include "Population.hpp"
+#include "globals.hpp"
 
 
 using namespace std;
@@ -15,7 +15,7 @@ using namespace std;
 list<Kolor *> poprzednie;
 list<unsigned> poprzednie_dobre, poprzednie_miejsca;
 
-#include "sprawdz.hpp"
+#include "check.hpp"
 
 void wyswietl_ciag(Kolor *p, const unsigned dlugosc)
 {
