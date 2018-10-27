@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <algorithm>
 
-#include "populacja.h"
-#include "zmienne_globalne.h"
+#include "populacja.hpp"
+#include "zmienne_globalne.hpp"
 
 using namespace std;
 

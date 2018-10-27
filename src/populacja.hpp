@@ -1,4 +1,4 @@
-#include "osobnik.h"
+#include "osobnik.hpp"
 
 #ifndef POPULACJA
 #define POPULACJA

@@ -1,6 +1,6 @@
 #include <string>
 
-#include "kolor.h"
+#include "kolor.hpp"
 
 std::ostream& operator << (std::ostream& wyj, Kolor const &arg)
 {
