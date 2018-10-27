@@ -1,6 +1,6 @@
-#include "Individual.hpp"
-
 #pragma once
+
+#include "Individual.hpp"
 
 class Population
 {

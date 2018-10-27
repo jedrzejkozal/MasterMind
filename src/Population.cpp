@@ -31,7 +31,7 @@ unsigned lista_zwroc(list<int> *l, unsigned index)
 
 bool compareosobnik1(const Individual * a, const Individual * b)
 {
-	return (a->get_przystosowanie() < b->get_przystosowanie());
+	return (a->getFitness() < b->getFitness());
 }
 
 void Population::selekcja_elitarna()
@@ -42,24 +42,24 @@ void Population::selekcja_elitarna()
 
 	suma = 0;
 	for (unsigned i = rozm_populacji / 2 + 1; i < rozm_populacji; i++)
-		suma += osobniki[i]->get_przystosowanie();
+		suma += osobniki[i]->getFitness();
 
 	unsigned j = 1;
-	prawd_wybrania[0] = osobniki[rozm_populacji/2]->get_przystosowanie() * 100 / suma;
+	prawd_wybrania[0] = osobniki[rozm_populacji/2]->getFitness() * 100 / suma;
 	for (unsigned i = rozm_populacji/2+1; i < rozm_populacji; i++, j++)
-		prawd_wybrania[j] = osobniki[i]->get_przystosowanie() * 100 / suma + prawd_wybrania[i - 1];
+		prawd_wybrania[j] = osobniki[i]->getFitness() * 100 / suma + prawd_wybrania[i - 1];
 }
 
 void Population::oblicz_przystosowania()
 {
 	for (unsigned i = 0; i < rozm_populacji; i++)
-		osobniki[i]->oblicz_przystosowanie();
+		osobniki[i]->calcFitness();
 }
 
 void Population::nieujemne_przystosowania()
 {
 	for (unsigned i = 0; i < rozm_populacji; i++)
-		osobniki[i]->set_przystosowanie(osobniki[i]->get_przystosowanie() - min_przystosowanie);
+		osobniki[i]->set_przystosowanie(osobniki[i]->getFitness() - min_przystosowanie);
 }
 
 void Population::nowa_tablica_inicjalizuj()
@@ -172,15 +172,15 @@ void Population::oblicz_statystyki()
 	for (unsigned i = 0; i < rozm_populacji; i++)
 	{
 		//zbieranie wszystkich statystyk
-		suma += osobniki[i]->get_przystosowanie();
-		if (osobniki[i]->get_przystosowanie() > max_przystosowanie)
+		suma += osobniki[i]->getFitness();
+		if (osobniki[i]->getFitness() > max_przystosowanie)
 		{
-			max_przystosowanie = osobniki[i]->get_przystosowanie();
+			max_przystosowanie = osobniki[i]->getFitness();
 			najlepszy = osobniki[i];
 		}
-		if (osobniki[i]->get_przystosowanie() < min_przystosowanie)
+		if (osobniki[i]->getFitness() < min_przystosowanie)
 		{
-			min_przystosowanie = osobniki[i]->get_przystosowanie();
+			min_przystosowanie = osobniki[i]->getFitness();
 			najgorszy = osobniki[i];
 		}
 	}
@@ -218,7 +218,7 @@ void Population::wyswietl() const
 		for (unsigned j = 0; j < ile_w_kolumnie; j++)
 			if (i < rozm_populacji)
 			{
-				cout << i+j << " \t" << osobniki[i+j]->get_przystosowanie() << " \t";
+				cout << i+j << " \t" << osobniki[i+j]->getFitness() << " \t";
 				osobniki[i+j]->wyswietl();
 				cout << "\t";
 			}

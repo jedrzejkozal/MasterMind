@@ -2,21 +2,20 @@
 
 #define ILOSC_DOSTEPNYCH 9
 
-#include <iostream>
 #include <cstdlib>
 
 
 enum color
 {
-	bialy = 0,
-	czerwony = 1,
-	zielony = 2,
-	fioletowy = 3,
-	turkusowy = 4,
-	szary = 5,
-	niebieski = 6,
-	zolty = 7,
-	czarny = 8
+	white = 0,
+	red = 1,
+	green = 2,
+	purple = 3,
+	turquoise = 4,
+	gray = 5,
+	blue = 6,
+	yellow = 7,
+	black = 8
 };
 
 class Color
@@ -32,19 +31,11 @@ public:
 			return false;
 	}
 
-	Color()	{		col = static_cast<color>(std::rand() % ILOSC_DOSTEPNYCH);	}
-	Color(int arg)	{		col = static_cast<color>(arg);	}
-	Color(Color *arg)	{		col = arg->col;	}
-	Color operator = (Color arg)
-	{
-		col = arg.col;
-		return arg;
-	}
-	Color operator = (color arg)
-	{
-		col = arg;
-		return arg;
-	}
+	Color();
+	Color(int arg);
+	Color(Color *arg);
+	Color operator = (Color arg);
+	Color operator = (color arg);
 };
 
 std::ostream& operator << (std::ostream& wyj, Color const &arg);

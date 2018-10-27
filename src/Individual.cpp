@@ -12,7 +12,7 @@ extern list<Color *> poprzednie;
 extern list<unsigned> poprzednie_dobre, poprzednie_miejsca;
 
 
-double Individual::odkoduj()
+double Individual::decode()
 {
 	int odleglosc = 0;
 	unsigned dobre_miejsce, dobry_kolor;
@@ -27,9 +27,25 @@ double Individual::odkoduj()
 	return odleglosc;
 }
 
-double Individual::oblicz_przystosowanie()
+double Individual::calcFitness()
 {
-	return przystosowanie = odkoduj();
+	return przystosowanie = decode();
+}
+
+double Individual::getFitness() const
+{
+	return przystosowanie;
+}
+
+void Individual::set_przystosowanie(double arg)
+{
+	przystosowanie = arg;
+}
+
+void Individual::wyswietl() const
+{
+	for(unsigned i = 0; i < rozmiar; i++)
+		std::cout << allele[i];
 }
 
 Individual &Individual::operator = (Individual &osob)
@@ -37,7 +53,7 @@ Individual &Individual::operator = (Individual &osob)
 	for (unsigned i = 0; i < rozmiar; i++)
 		allele[i] = osob[i];
 
-	przystosowanie = osob.get_przystosowanie();
+	przystosowanie = osob.getFitness();
 	return osob;
 }
 
@@ -70,8 +86,15 @@ Individual::Individual(unsigned rozmiar_ciagu) : rozmiar(rozmiar_ciagu)
 	{
 		for (unsigned i = 0; i < rozmiar; i++) //losowe przydzielenie bitow
 			allele[i] = static_cast<color>(std::rand() % ILOSC_DOSTEPNYCH);
-		oblicz_przystosowanie();
+		calcFitness();
 	}
 	else
 		std::cerr << "Individual: konstrutor: nie mozna przydzielic pamieci!" << std::endl;
+}
+
+void Individual::zwolnij_pamiec()
+{
+	if (allele != NULL)
+		delete[] allele;
+	allele = NULL;
 }
