@@ -4,7 +4,7 @@ proba - kombinacja, ktora ma byc oceniania
 dlugosc - dlugosc lancuchow zmiennych
 poprawne - ilosc kulek na swoim miejscu i o odpowiednim kolorze w proponowanej kombinacji
 poprawne_miejsca - ilosc kulek na poprawnym miejscu, ale z innym kolorem*/
-void sprawdz(Kolor *kod, Kolor *proba, const unsigned dlugosc, unsigned &poprawne, unsigned &poprawne_miejsca)
+void check(Color *kod, Color *proba, const unsigned dlugosc, unsigned &poprawne, unsigned &poprawne_miejsca)
 {
 	poprawne = poprawne_miejsca = 0;
 

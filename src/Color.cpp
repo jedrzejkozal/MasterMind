@@ -2,17 +2,17 @@
 
 #include "Color.hpp"
 
-std::ostream& operator << (std::ostream& wyj, Kolor const &arg)
+std::ostream& operator << (std::ostream& wyj, Color const &arg)
 {
-	wyj << (int) arg.kol;
+	wyj << (int) arg.col;
 	return wyj;
 }
 
 
-std::istream& operator >> (std::istream &wej, Kolor &arg)
+std::istream& operator >> (std::istream &wej, Color &arg)
 {
 	int tmp;
 	wej >> tmp;
-	arg.kol = (kolor)tmp;
+	arg.col = (color)tmp;
 	return wej;
 }

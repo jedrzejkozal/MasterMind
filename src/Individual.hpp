@@ -8,9 +8,9 @@
 
 
 //osobnik
-class osobnik
+class Individual
 {
-	Kolor *allele;
+	Color *allele;
 	const unsigned rozmiar;
 	double przystosowanie;
 public:
@@ -20,9 +20,9 @@ public:
 	void set_przystosowanie(double arg) { przystosowanie = arg; }
 
 
-	Kolor operator [] (unsigned index) const;
-	Kolor &operator [](unsigned index);
-	osobnik &operator = (osobnik &osob);
+	Color operator [] (unsigned index) const;
+	Color &operator [](unsigned index);
+	Individual &operator = (Individual &osob);
 
 	void wyswietl() const
 	{
@@ -30,7 +30,7 @@ public:
 			std::cout << allele[i];
 	}
 
-	osobnik(unsigned rozmiar_ciagu);
+	Individual(unsigned rozmiar_ciagu);
 	void zwolnij_pamiec() { if (allele != NULL) delete[] allele; allele = NULL; }
 };
 

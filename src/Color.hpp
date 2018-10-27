@@ -1,5 +1,4 @@
-#ifndef  KOLOR
-#define KOLOR
+#pragma once
 
 #define ILOSC_DOSTEPNYCH 9
 
@@ -7,7 +6,7 @@
 #include <cstdlib>
 
 
-enum kolor
+enum color
 {
 	bialy = 0,
 	czerwony = 1,
@@ -20,35 +19,33 @@ enum kolor
 	czarny = 8
 };
 
-class Kolor
+class Color
 {
 public:
-	kolor kol;
+	color col;
 
-	bool operator == (Kolor arg)
+	bool operator == (Color arg)
 	{
-		if ((int)kol == (int)arg.kol)
+		if ((int)col == (int)arg.col)
 			return true;
 		else
 			return false;
 	}
 
-	Kolor()	{		kol = static_cast<kolor>(std::rand() % ILOSC_DOSTEPNYCH);	}
-	Kolor(int arg)	{		kol = static_cast<kolor>(arg);	}
-	Kolor(Kolor *arg)	{		kol = arg->kol;	}
-	Kolor operator = (Kolor arg)
+	Color()	{		col = static_cast<color>(std::rand() % ILOSC_DOSTEPNYCH);	}
+	Color(int arg)	{		col = static_cast<color>(arg);	}
+	Color(Color *arg)	{		col = arg->col;	}
+	Color operator = (Color arg)
 	{
-		kol = arg.kol;
+		col = arg.col;
 		return arg;
 	}
-	Kolor operator = (kolor arg)
+	Color operator = (color arg)
 	{
-		kol = arg;
+		col = arg;
 		return arg;
 	}
 };
 
-std::ostream& operator << (std::ostream& wyj, Kolor const &arg);
-std::istream& operator >> (std::istream &wej, Kolor &arg);
-
-#endif // ! KOLOR
+std::ostream& operator << (std::ostream& wyj, Color const &arg);
+std::istream& operator >> (std::istream &wej, Color &arg);

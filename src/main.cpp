@@ -12,12 +12,12 @@
 
 using namespace std;
 
-list<Kolor *> poprzednie;
+list<Color *> poprzednie;
 list<unsigned> poprzednie_dobre, poprzednie_miejsca;
 
 #include "check.hpp"
 
-void wyswietl_ciag(Kolor *p, const unsigned dlugosc)
+void wyswietl_ciag(Color *p, const unsigned dlugosc)
 {
 	for (unsigned i = 0; i < dlugosc; i++)
 		cout << p[i];
@@ -29,22 +29,15 @@ int main()
 
 	const unsigned short dlugosc_ciagu = 6;		//dlugosc ciagu do odganidniecia
 	unsigned ilosc_poprawnych, ilosc_poprawnych_miejsc;
-	populacja pop(20, dlugosc_ciagu, 4, 0.4);
-	Kolor *kod; Kolor *proba;
+	Population pop(20, dlugosc_ciagu, 4, 0.4);
+	Color *kod;
+	Color *proba;
 
 
-	kod = new Kolor[dlugosc_ciagu];
-	proba = new Kolor[dlugosc_ciagu];
+	kod = new Color[dlugosc_ciagu];
+	proba = new Color[dlugosc_ciagu];
 
 	cout << "Podaj kod, zlozony z 6 kolorow od 0 do 8" << endl;
-	/*
-	for (unsigned i = 0; i < dlugosc_ciagu; i++)
-	{
-		do
-		{
-			cin >> kod[i];
-		} while(kod[i].kol < 0 || kod[i].kol > ILOSC_DOSTEPNYCH - 1);
-	}*/
 	for (unsigned i = 0; i < dlugosc_ciagu; i++)
 		kod[i] = 0;
 
@@ -61,12 +54,12 @@ int main()
 			cout << "test" << endl;
 			//pop.wyswietl();
 
-		proba = new Kolor[dlugosc_ciagu];
+		proba = new Color[dlugosc_ciagu];
 		cout << "test" << endl;
 		for (unsigned i = 0; i < dlugosc_ciagu; i++) //iteracja po kazdym kolorze
 			proba[i] = (*pop.najlepszy)[i];
 		cout << "test" << endl;
-		sprawdz(kod, proba, dlugosc_ciagu, ilosc_poprawnych, ilosc_poprawnych_miejsc);
+		check(kod, proba, dlugosc_ciagu, ilosc_poprawnych, ilosc_poprawnych_miejsc);
 		//cout << endl << "Ilosc poprawnych: " << ilosc_poprawnych << endl << "Ilosc na dobrych miejscach: " << ilosc_poprawnych_miejsc << endl << endl;
 
 		poprzednie.push_back(proba);

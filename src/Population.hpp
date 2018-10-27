@@ -1,11 +1,10 @@
 #include "Individual.hpp"
 
-#ifndef POPULACJA
-#define POPULACJA
+#pragma once
 
-class populacja
+class Population
 {
-	osobnik** osobniki;
+	Individual** osobniki;
 
 	//zmienne do kontroli populacji
 	unsigned rozm_populacji;
@@ -21,7 +20,7 @@ class populacja
 	double min_przystosowanie;
 
 	//tworzenie nowej populacji
-	osobnik** nowa;
+	Individual** nowa;
 	void selekcja_elitarna();
 	void krzyzuj();
 	void mutuj();
@@ -38,12 +37,9 @@ public:
 
 
 	//wybrani osobnicy
-	osobnik *najlepszy;
-	osobnik *najgorszy;
+	Individual *najlepszy;
+	Individual *najgorszy;
 
-	populacja(unsigned lpop, unsigned rozm_alleli, double p_mutacji, double p_krzyozwania);
-	~populacja();
+	Population(unsigned lpop, unsigned rozm_alleli, double p_mutacji, double p_krzyozwania);
+	~Population();
 };
-
-
-#endif //!POPULACJA

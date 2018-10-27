@@ -29,12 +29,12 @@ unsigned lista_zwroc(list<int> *l, unsigned index)
 
 //TWORZENIE NOWEJ POPULACJI
 
-bool compareosobnik1(const osobnik * a, const osobnik * b)
+bool compareosobnik1(const Individual * a, const Individual * b)
 {
 	return (a->get_przystosowanie() < b->get_przystosowanie());
 }
 
-void populacja::selekcja_elitarna()
+void Population::selekcja_elitarna()
 {
 	//selekcja elitarna
 	prawd_wybrania = new double[rozm_populacji/2]; //prawd_wybrania + poprzednie, zeby mozna bylo jakos normalnie losowac nowa populacje
@@ -50,33 +50,33 @@ void populacja::selekcja_elitarna()
 		prawd_wybrania[j] = osobniki[i]->get_przystosowanie() * 100 / suma + prawd_wybrania[i - 1];
 }
 
-void populacja::oblicz_przystosowania()
+void Population::oblicz_przystosowania()
 {
 	for (unsigned i = 0; i < rozm_populacji; i++)
 		osobniki[i]->oblicz_przystosowanie();
 }
 
-void populacja::nieujemne_przystosowania()
+void Population::nieujemne_przystosowania()
 {
 	for (unsigned i = 0; i < rozm_populacji; i++)
 		osobniki[i]->set_przystosowanie(osobniki[i]->get_przystosowanie() - min_przystosowanie);
 }
 
-void populacja::nowa_tablica_inicjalizuj()
+void Population::nowa_tablica_inicjalizuj()
 {
-	nowa = new osobnik*[rozm_populacji];
+	nowa = new Individual*[rozm_populacji];
 	if (nowa == NULL)
 	{
-		cerr << "nowa_populacja(): Nie mozna przydzielic pamieci!" << endl;
+		cerr << "nowa_Population(): Nie mozna przydzielic pamieci!" << endl;
 		return;
 	}
 	else
 		for (unsigned i = 0; i < rozm_populacji; i++)
 		{
-			nowa[i] = new osobnik(rozmiar_ciagu);
+			nowa[i] = new Individual(rozmiar_ciagu);
 			if (nowa[i] == NULL)
 			{
-				cerr << "nowa_populacja(): Nie mozna przydzielic pamieci!" << endl;
+				cerr << "nowa_Population(): Nie mozna przydzielic pamieci!" << endl;
 				for (i--; (int)i > -1; i--)
 					delete nowa[i];
 				return;
@@ -84,7 +84,7 @@ void populacja::nowa_tablica_inicjalizuj()
 		}
 }
 
-void populacja::losuj_nowych_osobnikow()
+void Population::losuj_nowych_osobnikow()
 {
 	double losowana;
 
@@ -105,7 +105,7 @@ void populacja::losuj_nowych_osobnikow()
 
 //krzyzuje po kolei wszystkie osobniki, po tym jak mamy juz wybrana populacje
 //double prawd - prawdopodobienstwo wystepowania krzyzowania
-void populacja::krzyzuj()
+void Population::krzyzuj()
 {
 	list<int> indeksy;
 	for (unsigned i = 0; i < rozm_populacji; i++)
@@ -129,15 +129,15 @@ void populacja::krzyzuj()
 }
 
 //Mutacja - prawd - prawdopodobienstwo mutacji w %
-void populacja::mutuj()
+void Population::mutuj()
 {
 	for (unsigned i = 0; i < rozm_populacji; i++)
 		for (unsigned j = 0; j < rozmiar_ciagu; j++)
 			if ((std::rand() % 100000) / 1000 < prawd_mutacji) //prawodopodobienstwo wyrazone w %, powinno troszke pomoc
-				(*osobniki[i])[j] = (kolor) (std::rand() % ILOSC_DOSTEPNYCH);
+				(*osobniki[i])[j] = (color) (std::rand() % ILOSC_DOSTEPNYCH);
 }
 
-void populacja::nowa_populacja()
+void Population::nowa_populacja()
 {
 	oblicz_przystosowania();
 	nieujemne_przystosowania();
@@ -164,7 +164,7 @@ void populacja::nowa_populacja()
 
 //STATYSTYKI
 
-void populacja::oblicz_statystyki()
+void Population::oblicz_statystyki()
 {
 	suma = 0;
 	max_przystosowanie = -9999999999;
@@ -187,7 +187,7 @@ void populacja::oblicz_statystyki()
 	srednie_przystosowanie = suma / rozm_populacji; //obliczenie sredniej
 }
 
-void populacja::wyswietl_statystyki() const
+void Population::wyswietl_statystyki() const
 {
 	cout <<
 		//"Suma wszystkich przystosowan: " << suma << endl <<
@@ -201,14 +201,14 @@ void populacja::wyswietl_statystyki() const
 
 //DEBUGOWANIE
 
-void populacja::reinicjalizuj()
+void Population::reinicjalizuj()
 {
 	for (unsigned i = 0; i < rozm_populacji; i++)
 		for (unsigned j = 0; j < rozmiar_ciagu; j++)
 			(*osobniki[i])[j] = std::rand() % 2;
 }
 
-void populacja::wyswietl() const
+void Population::wyswietl() const
 {
 	unsigned ile_w_kolumnie = 1;
 	cout << "Wartosci wszystkich osobnikow:" << endl;
@@ -228,20 +228,20 @@ void populacja::wyswietl() const
 }
 
 
-populacja::populacja(unsigned lpop, unsigned rozm_alleli, double p_mutacji, double p_krzyozwania) : rozm_populacji(lpop), rozmiar_ciagu(rozm_alleli), prawd_mutacji(p_mutacji * 100), prawd_krzyzowania(p_krzyozwania)
+Population::Population(unsigned lpop, unsigned rozm_alleli, double p_mutacji, double p_krzyozwania) : rozm_populacji(lpop), rozmiar_ciagu(rozm_alleli), prawd_mutacji(p_mutacji * 100), prawd_krzyzowania(p_krzyozwania)
 {
-	osobniki = new osobnik*[lpop];
+	osobniki = new Individual*[lpop];
 	if (osobniki == NULL)
-		cerr << "Populacja: konstruktor: Nie mozna przydzielic pamieci!" << endl;
+		cerr << "Population: konstruktor: Nie mozna przydzielic pamieci!" << endl;
 	for (unsigned i = 0; i < lpop; i++)
 	{
-		osobniki[i] = new osobnik(rozm_alleli);
+		osobniki[i] = new Individual(rozm_alleli);
 		if (osobniki[i] == NULL)
-			cerr << "Populacja: konstruktor: Nie mozna przydzielic pamieci!" << endl;
+			cerr << "Population: konstruktor: Nie mozna przydzielic pamieci!" << endl;
 	}
 }
 
-populacja::~populacja()
+Population::~Population()
 {
 	if (osobniki != NULL)
 	{
