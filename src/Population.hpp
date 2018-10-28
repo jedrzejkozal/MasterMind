@@ -37,10 +37,10 @@ private:
 	double minFitness;
 
 	//tworzenie nowej populacji
-	Individual** nowa;
+	Individual** newPop;
 	void selekcja_elitarna();
-	void krzyzuj();
-	void mutuj();
-	void nowa_tablica_inicjalizuj();
-	void losuj_nowych_osobnikow();
+	void crossover();
+	void mutate();
+	void initializeNewTable();
+	void drawNewIndividual();
 };

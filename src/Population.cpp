@@ -62,10 +62,10 @@ void Population::nonnegativeFitness()
 		individuals[i]->setFitness(individuals[i]->getFitness() - minFitness);
 }
 
-void Population::nowa_tablica_inicjalizuj()
+void Population::initializeNewTable()
 {
-	nowa = new Individual*[populationSize];
-	if (nowa == NULL)
+	newPop = new Individual*[populationSize];
+	if (newPop == NULL)
 	{
 		cerr << "nowa_Population(): Nie mozna przydzielic pamieci!" << endl;
 		return;
@@ -73,18 +73,18 @@ void Population::nowa_tablica_inicjalizuj()
 	else
 		for (unsigned i = 0; i < populationSize; i++)
 		{
-			nowa[i] = new Individual(seriesSize);
-			if (nowa[i] == NULL)
+			newPop[i] = new Individual(seriesSize);
+			if (newPop[i] == NULL)
 			{
 				cerr << "nowa_Population(): Nie mozna przydzielic pamieci!" << endl;
 				for (i--; (int)i > -1; i--)
-					delete nowa[i];
+					delete newPop[i];
 				return;
 			}
 		}
 }
 
-void Population::losuj_nowych_osobnikow()
+void Population::drawNewIndividual()
 {
 	double losowana;
 
@@ -96,16 +96,16 @@ void Population::losuj_nowych_osobnikow()
 		{
 			if (losowana < chossingProbability[j])
 			{
-				*nowa[i] = (*(individuals[j]));
+				*newPop[i] = (*(individuals[j]));
 				break;
 			}
 		}
 	}
 }
 
-//krzyzuje po kolei wszystkie individuals, po tym jak mamy juz wybrana populacje
+//crossovere po kolei wszystkie individuals, po tym jak mamy juz wybrana populacje
 //double prawd - prawdopodobienstwo wystepowania krzyzowania
-void Population::krzyzuj()
+void Population::crossover()
 {
 	list<int> indeksy;
 	for (unsigned i = 0; i < populationSize; i++)
@@ -129,7 +129,7 @@ void Population::krzyzuj()
 }
 
 //Mutacja - prawd - prawdopodobienstwo mutacji w %
-void Population::mutuj()
+void Population::mutate()
 {
 	for (unsigned i = 0; i < populationSize; i++)
 		for (unsigned j = 0; j < seriesSize; j++)
@@ -144,8 +144,8 @@ void Population::newPopulation()
 	calcStats();
 	selekcja_elitarna();
 	//printStats();
-	nowa_tablica_inicjalizuj();
-	losuj_nowych_osobnikow();
+	initializeNewTable();
+	drawNewIndividual();
 
 	delete[] chossingProbability;
 	for (unsigned i = 0; i < populationSize; i++)
@@ -154,11 +154,11 @@ void Population::newPopulation()
 		delete individuals[i];
 	}
 	delete[] individuals;
-	individuals = nowa;
-	nowa = NULL;
+	individuals = newPop;
+	newPop = NULL;
 	//wyswietl();
-	krzyzuj();
-	mutuj();
+	crossover();
+	mutate();
 	calcFitness();
 }
 
