@@ -3,4 +3,4 @@
 //#include "deque.h"
 #include <list>
 
-void check(Color *kod, Color *proba, const unsigned dlugosc, unsigned &poprawne, unsigned &poprawne_miejsca);
+void check(Color *code, Color *guess, const unsigned length, unsigned &correct, unsigned &correctPlace);

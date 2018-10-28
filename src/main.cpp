@@ -48,9 +48,9 @@ int main()
 
 	do
 	{
-			pop.nowa_populacja();
+			pop.newPopulation();
 			cout << "test" << endl;
-			pop.oblicz_statystyki();
+			pop.calcStats();
 			cout << "test" << endl;
 			//pop.wyswietl();
 

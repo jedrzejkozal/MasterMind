@@ -30,6 +30,14 @@ Color Color::operator = (color arg)
 	return arg;
 }
 
+bool Color::operator == (Color arg)
+{
+	if ((int)col == (int)arg.col)
+		return true;
+	else
+		return false;
+}
+
 std::ostream& operator << (std::ostream& wyj, Color const &arg)
 {
 	wyj << (int) arg.col;

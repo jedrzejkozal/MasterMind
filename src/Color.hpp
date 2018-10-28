@@ -21,21 +21,14 @@ enum color
 class Color
 {
 public:
-	color col;
-
-	bool operator == (Color arg)
-	{
-		if ((int)col == (int)arg.col)
-			return true;
-		else
-			return false;
-	}
-
 	Color();
 	Color(int arg);
 	Color(Color *arg);
 	Color operator = (Color arg);
 	Color operator = (color arg);
+	bool operator == (Color arg);
+
+	color col;
 };
 
 std::ostream& operator << (std::ostream& wyj, Color const &arg);
