@@ -8,4 +8,5 @@ class ICrossingStrategy
 {
 public:
     virtual void cross(std::vector<Individual> population) = 0;
+    virtual ~ICrossingStrategy() = default;
 };

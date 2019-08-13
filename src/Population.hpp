@@ -28,8 +28,8 @@ Population::Population(unsigned popSize,
                        float mutationProb,
                        float crossingProb,
                        const std::function<float(const Individual &)> fitnessFunction,
-                       const ICrossingStrategy &&crossingStrategy = DefaultCrossing(),
-                       const IMutationStrategy &&mutationStrategy = DefaultMutation())
+                       const ICrossingStrategy &&crossingStrategy,
+                       const IMutationStrategy &&mutationStrategy)
     : population(popSize, Individual(allelesSize))
 {
 }
