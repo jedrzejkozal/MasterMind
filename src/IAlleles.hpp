@@ -38,7 +38,7 @@ DefaultAlleles::DefaultAlleles(unsigned allelesSize,
       minAllelesValue(min),
       maxAllelesValue(max)
 {
-    auto p = Probabilistic();
+    Probabilistic p;
     for (auto it = alleles.begin(); it != alleles.end(); it++)
         *it = p.uniform(minAllelesValue, maxAllelesValue);
 }

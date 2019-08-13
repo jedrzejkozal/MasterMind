@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <memory>
 
 #include "IMutationStrategy.hpp"
@@ -8,24 +7,20 @@
 class DefaultMutation : public IMutationStrategy
 {
 public:
-    DefaultMutation(float mutationProb)
-        : mutationProbability(mutationProb)
-    {
-        prob = std::make_shared<const Probabilistic>();
-    }
+    DefaultMutation(float mutationProb);
 
     virtual void mutate(IAlleles &individual) override;
 
-    bool probTest()
-    {
-        std::cout << "probTest call" << std::endl;
-        return prob->bernoulli(0.5);
-    }
-
 protected:
     float mutationProbability;
-    std::shared_ptr<const Probabilistic> prob;
+    std::shared_ptr<Probabilistic> prob;
 };
+
+DefaultMutation::DefaultMutation(float mutationProb)
+    : mutationProbability(mutationProb)
+{
+    prob = std::make_shared<Probabilistic>();
+}
 
 void DefaultMutation::mutate(IAlleles &alleles)
 {
