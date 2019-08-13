@@ -16,16 +16,13 @@ SET(PROJECT_SOURCES
   #${PROJECT_SOURCE_DIR}/Grade.cpp
   #${PROJECT_SOURCE_DIR}/Individual.cpp
   #${PROJECT_SOURCE_DIR}/Population.cpp
+  ${PROJECT_SOURCE_DIR}/Probabilistic.cpp
 )
 
 SET(TESTS_SOURCES
   tests/main_test.cpp
   ${TESTS_DIR}/ProbabilisticTest.cpp
   ${TESTS_DIR}/DefaultMutationTest.cpp
-)
-
-SET(STUBS_SOURCES
-  #${STUBS_DIR}/Probabilistic.cpp
 )
 
 SET(MOCKS_SOURCES
@@ -37,12 +34,10 @@ SET(TEST_FILES
   ${TESTS_SOURCES}
   ${STUBS_SOURCES}
   ${MOCKS_SOURCES}
-  ${PROJECT_SOURCE_DIR}/Probabilistic.cpp
 )
 
 SET(PROGRAM_SOURCES
   ${PROJECT_SOURCES}
-  ${PROJECT_SOURCE_DIR}/Probabilistic.cpp
   main.cpp
 )
 

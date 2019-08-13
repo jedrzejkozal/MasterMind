@@ -8,12 +8,14 @@
 class DefaultMutation : public IMutationStrategy
 {
 public:
-    DefaultMutation()
+    DefaultMutation(float mutationProb)
+        : mutationProbability(mutationProb)
     {
         prob = std::make_shared<const Probabilistic>();
     }
 
-    virtual void mutate(Individual &individual) override;
+    virtual void mutate(IAlleles &individual) override;
+
     bool probTest()
     {
         std::cout << "probTest call" << std::endl;
@@ -21,9 +23,17 @@ public:
     }
 
 protected:
+    float mutationProbability;
     std::shared_ptr<const Probabilistic> prob;
 };
 
-void DefaultMutation::mutate(Individual &individual)
+void DefaultMutation::mutate(IAlleles &alleles)
 {
+    auto iterators = alleles.iterators();
+    auto begin = std::get<0>(iterators);
+    auto end = std::get<1>(iterators);
+
+    for (auto it = begin; it != end; it++)
+        if (prob->bernoulli(mutationProbability))
+            alleles.switch_allele_at(it);
 }
