@@ -9,9 +9,9 @@ class DefaultMutation : public IMutationStrategy
 public:
     DefaultMutation(float mutationProb);
 
-    virtual void mutate(IAlleles &individual) override;
+    virtual void mutate(IAlleles &alleles) override;
 
 protected:
-    float mutationProbability;
+    const float mutationProbability;
     std::shared_ptr<Probabilistic> prob;
 };

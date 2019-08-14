@@ -20,7 +20,11 @@ public:
                const IMutationStrategy &&mutationStrategy = std::move(DefaultMutation(0.5)));
 
 private:
+    void mutate();
+
     std::vector<Individual> population;
+    std::unique_ptr<ICrossingStrategy> crossing;
+    std::unique_ptr<IMutationStrategy> mutation;
 };
 
 Population::Population(unsigned popSize,
@@ -32,4 +36,10 @@ Population::Population(unsigned popSize,
                        const IMutationStrategy &&mutationStrategy)
     : population(popSize, Individual(allelesSize))
 {
+}
+
+void Population::mutate()
+{
+    for (auto &i : population)
+        i.mutate(*mutation.get());
 }
