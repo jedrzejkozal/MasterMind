@@ -16,8 +16,8 @@ public:
                float mutationProb,
                float crossingProb,
                const std::function<float(const Individual &)> fitnessFunction,
-               const ICrossingStrategy &&crossingStrategy = DefaultCrossing(),
-               const IMutationStrategy &&mutationStrategy = DefaultMutation());
+               const ICrossingStrategy &&crossingStrategy = std::move(DefaultCrossing()),
+               const IMutationStrategy &&mutationStrategy = std::move(DefaultMutation(0.5)));
 
 private:
     std::vector<Individual> population;

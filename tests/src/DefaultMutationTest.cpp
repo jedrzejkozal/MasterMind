@@ -1,7 +1,9 @@
 #include <memory>
+
 #include "gtest/gtest.h"
-#include "../mocks/ProbabilisticMock.hpp"
 #include "../../src/DefaultMutation.hpp"
+#include "../mocks/ProbabilisticMock.hpp"
+#include "../testables/DefaultAllelesTestable.hpp"
 
 using testing::Return;
 
@@ -14,33 +16,6 @@ public:
         : DefaultMutation(0.1)
     {
         prob = p;
-    }
-};
-
-class DefaultAllelesTestable : public DefaultAlleles
-{
-public:
-    DefaultAllelesTestable(std::initializer_list<unsigned> allelesArg)
-        : DefaultAlleles(1, 0, 1)
-    {
-        alleles = allelesArg;
-    }
-
-    DefaultAllelesTestable(std::vector<unsigned> allelesArg)
-        : DefaultAlleles(1, 0, 1)
-    {
-        alleles = allelesArg;
-    }
-
-    bool allelesEqual(std::initializer_list<unsigned> expected)
-    {
-        auto expected_vec = std::vector<unsigned>(expected);
-        return std::equal(alleles.begin(), alleles.end(), expected_vec.begin());
-    }
-
-    unsigned countOnes()
-    {
-        return std::count_if(alleles.begin(), alleles.end(), [](const unsigned &lhs) { return lhs == 1; });
     }
 };
 
@@ -75,7 +50,7 @@ TEST(DefaultMutationTest, lastAlleleIsSwitched)
     ASSERT_TRUE(alleles.allelesEqual({0, 0, 0}));
 }
 
-TEST(DefaultMutationTest, normalProbabilisticImplWithProbHalfNearlyHalfOfAllelesAreSwitched)
+TEST(DefaultMutationTest, probabilisticMutationWithProbHalfNearlyHalfOfZeroAllelesAreSwitched)
 {
     unsigned alleleSize = 1000;
     auto alleles = DefaultAllelesTestable(std::vector<unsigned>(alleleSize, 0));
@@ -85,4 +60,15 @@ TEST(DefaultMutationTest, normalProbabilisticImplWithProbHalfNearlyHalfOfAlleles
 
     auto howManyOnes = alleles.countOnes() / float(alleleSize);
     ASSERT_NEAR(howManyOnes, 0.5, 0.05);
+}
+
+TEST(DefaultMutationTest, probabilisticMutationWithProbOneAllOfZeroAllelesAreSwitched)
+{
+    unsigned alleleSize = 1000;
+    auto alleles = DefaultAllelesTestable(std::vector<unsigned>(alleleSize, 0));
+
+    DefaultMutation sut(1.0);
+    sut.mutate(alleles);
+
+    ASSERT_EQ(alleles.countOnes(), alleleSize);
 }

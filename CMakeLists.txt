@@ -17,12 +17,15 @@ SET(PROJECT_SOURCES
   #${PROJECT_SOURCE_DIR}/Individual.cpp
   #${PROJECT_SOURCE_DIR}/Population.cpp
   ${PROJECT_SOURCE_DIR}/Probabilistic.cpp
+  ${PROJECT_SOURCE_DIR}/IAlleles.cpp
+  ${PROJECT_SOURCE_DIR}/DefaultMutation.cpp
 )
 
 SET(TESTS_SOURCES
   tests/main_test.cpp
   ${TESTS_DIR}/ProbabilisticTest.cpp
   ${TESTS_DIR}/DefaultMutationTest.cpp
+  ${TESTS_DIR}/IndividualTest.cpp
 )
 
 SET(MOCKS_SOURCES
