@@ -10,26 +10,24 @@ class Individual
 public:
     Individual(unsigned allelesSize);
     Individual(std::shared_ptr<IAlleles> allelesArg);
+    Individual(const Individual &lhs);
 
     void mutate(IMutationStrategy &mutation);
+    void cross(Individual &lhs, const unsigned &crossingSpot);
+
+    std::shared_ptr<IAlleles> alleles;
 
 private:
-    unsigned alleleSize;
-    std::shared_ptr<IAlleles> alleles;
+    template <typename IteratorType>
+    void moveBeginIteratorToCrossingPoint(IteratorType &beginIterator, unsigned crossingPoint);
 };
 
-Individual::Individual(unsigned allelesSize)
-    : alleleSize(allelesSize)
+template <typename IteratorType>
+void Individual::moveBeginIteratorToCrossingPoint(IteratorType &beginIterator, unsigned crossingPoint)
 {
-    alleles = std::make_shared<DefaultAlleles>(DefaultAlleles(allelesSize, 0, 1));
-}
-
-Individual::Individual(std::shared_ptr<IAlleles> allelesArg)
-    : alleles(allelesArg)
-{
-}
-
-void Individual::mutate(IMutationStrategy &mutation)
-{
-    mutation.mutate(*alleles.get());
+    while (crossingPoint > 0)
+    {
+        beginIterator++;
+        crossingPoint--;
+    }
 }

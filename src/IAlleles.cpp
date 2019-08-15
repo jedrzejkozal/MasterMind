@@ -9,7 +9,12 @@ DefaultAlleles::DefaultAlleles(unsigned allelesSize,
 {
     Probabilistic p;
     for (auto it = alleles.begin(); it != alleles.end(); it++)
-        *it = p.uniform(minAllelesValue, maxAllelesValue);
+        *it = p.uniform_int(minAllelesValue, maxAllelesValue);
+}
+
+std::shared_ptr<IAlleles> DefaultAlleles::copy()
+{
+    return std::make_shared<DefaultAlleles>(*this);
 }
 
 void DefaultAlleles::switch_allele_at(std::vector<unsigned>::iterator &iterator)
@@ -22,4 +27,9 @@ void DefaultAlleles::switch_allele_at(std::vector<unsigned>::iterator &iterator)
 DefaultAlleles::AllelesIterators DefaultAlleles::iterators()
 {
     return std::make_tuple(std::begin(alleles), std::end(alleles));
+}
+
+unsigned DefaultAlleles::size() const
+{
+    return alleles.size();
 }

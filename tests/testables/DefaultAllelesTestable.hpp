@@ -17,6 +17,11 @@ public:
         alleles = allelesArg;
     }
 
+    virtual std::shared_ptr<IAlleles> copy() override
+    {
+        return std::make_shared<DefaultAllelesTestable>(*this);
+    }
+
     bool allelesEqual(std::initializer_list<unsigned> expected)
     {
         auto expected_vec = std::vector<unsigned>(expected);

@@ -19,6 +19,8 @@ SET(PROJECT_SOURCES
   ${PROJECT_SOURCE_DIR}/Probabilistic.cpp
   ${PROJECT_SOURCE_DIR}/IAlleles.cpp
   ${PROJECT_SOURCE_DIR}/DefaultMutation.cpp
+  ${PROJECT_SOURCE_DIR}/Individual.cpp
+  ${PROJECT_SOURCE_DIR}/DefaultCrossing.cpp
 )
 
 SET(TESTS_SOURCES
@@ -26,6 +28,7 @@ SET(TESTS_SOURCES
   ${TESTS_DIR}/ProbabilisticTest.cpp
   ${TESTS_DIR}/DefaultMutationTest.cpp
   ${TESTS_DIR}/IndividualTest.cpp
+  ${TESTS_DIR}/DefaultCrossingTest.cpp
 )
 
 SET(MOCKS_SOURCES
