@@ -4,21 +4,21 @@
 
 #include "Individual.hpp"
 
-class ICrossingStrategy
+class ISelectionStrategy
 {
 public:
-    ICrossingStrategy(const std::function<float(const Individual &)> fitFunc)
+    ISelectionStrategy(const std::function<float(const Individual &)> fitFunc)
         : fitnessFunction(fitFunc)
     {
     }
 
-    ICrossingStrategy(ICrossingStrategy &&rhs)
+    ISelectionStrategy(ISelectionStrategy &&rhs)
     {
         fitnessFunction = std::move(rhs.fitnessFunction);
     }
 
-    virtual void cross(std::vector<Individual> &population) = 0;
-    virtual ~ICrossingStrategy() = default;
+    virtual void select(std::vector<Individual> &population) = 0;
+    virtual ~ISelectionStrategy() = default;
 
 protected:
     std::function<float(const Individual &)> fitnessFunction;

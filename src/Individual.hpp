@@ -13,7 +13,7 @@ public:
     Individual(const Individual &lhs);
 
     void mutate(IMutationStrategy &mutation);
-    void cross(Individual &lhs, const unsigned &crossingSpot);
+    void mate(Individual &lhs, const unsigned &crossingSpot);
 
     std::shared_ptr<IAlleles> alleles;
 

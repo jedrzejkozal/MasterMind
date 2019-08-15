@@ -3,8 +3,8 @@
 #include <functional>
 
 #include "Individual.hpp"
-#include "ICrossingStrategy.hpp"
-#include "DefaultCrossing.hpp"
+#include "DefaultSelection.hpp"
+#include "DefaultCrossover.hpp"
 #include "IMutationStrategy.hpp"
 #include "DefaultMutation.hpp"
 
@@ -13,18 +13,20 @@ class Population
 public:
     Population(unsigned popSize,
                unsigned allelesSize,
+               float crossoverProb,
                float mutationProb,
-               float crossingProb,
                const std::function<float(const Individual &)> fitnessFunction)
-        : crossing(std::make_unique<DefaultCrossing>(std::move(DefaultCrossing(crossingProb, fitnessFunction)))),
+        : selection(std::make_unique<DefaultSelection>(std::move(DefaultSelection(fitnessFunction)))),
+          crossing(std::make_unique<DefaultCrossover>(std::move(DefaultCrossover(crossoverProb)))),
           mutation(std::make_unique<DefaultMutation>(std::move(DefaultMutation(mutationProb))))
     {
+        initialisePopulation(popSize, allelesSize);
     }
 
     Population(unsigned popSize,
                unsigned allelesSize,
                const std::function<float(const Individual &)> fitnessFunction,
-               std::unique_ptr<ICrossingStrategy> &&crossingStrategy,
+               std::unique_ptr<ICrossoverStrategy> &&crossingStrategy,
                std::unique_ptr<IMutationStrategy> &&mutationStrategy)
         : Population(popSize, allelesSize, 0.0, 0.0, fitnessFunction)
     {
@@ -35,21 +37,13 @@ public:
     }
 
 private:
+    void initialisePopulation(unsigned populationSize, unsigned allelesSize);
     void mutate();
+    void select();
     void cross();
 
     std::vector<Individual> population;
-    std::unique_ptr<ICrossingStrategy> crossing;
+    std::unique_ptr<ISelectionStrategy> selection;
+    std::unique_ptr<ICrossoverStrategy> crossing;
     std::unique_ptr<IMutationStrategy> mutation;
 };
-
-void Population::cross()
-{
-    crossing->cross(population);
-}
-
-void Population::mutate()
-{
-    for (auto &i : population)
-        i.mutate(*mutation.get());
-}

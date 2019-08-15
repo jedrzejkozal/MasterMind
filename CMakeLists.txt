@@ -20,7 +20,9 @@ SET(PROJECT_SOURCES
   ${PROJECT_SOURCE_DIR}/IAlleles.cpp
   ${PROJECT_SOURCE_DIR}/DefaultMutation.cpp
   ${PROJECT_SOURCE_DIR}/Individual.cpp
-  ${PROJECT_SOURCE_DIR}/DefaultCrossing.cpp
+  ${PROJECT_SOURCE_DIR}/DefaultSelection.cpp
+  ${PROJECT_SOURCE_DIR}/DefaultCrossover.cpp
+  ${PROJECT_SOURCE_DIR}/Population.cpp
 )
 
 SET(TESTS_SOURCES
@@ -28,7 +30,7 @@ SET(TESTS_SOURCES
   ${TESTS_DIR}/ProbabilisticTest.cpp
   ${TESTS_DIR}/DefaultMutationTest.cpp
   ${TESTS_DIR}/IndividualTest.cpp
-  ${TESTS_DIR}/DefaultCrossingTest.cpp
+  ${TESTS_DIR}/DefaultSelectionTest.cpp
 )
 
 SET(MOCKS_SOURCES

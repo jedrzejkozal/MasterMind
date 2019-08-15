@@ -20,7 +20,7 @@ void Individual::mutate(IMutationStrategy &mutation)
     mutation.mutate(*alleles.get());
 }
 
-void Individual::cross(Individual &lhs, const unsigned &crossingSpot)
+void Individual::mate(Individual &lhs, const unsigned &crossingSpot)
 {
     auto firstIterators = alleles->iterators();
     auto secondIterators = lhs.alleles->iterators();
