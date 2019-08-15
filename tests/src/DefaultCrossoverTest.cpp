@@ -23,9 +23,20 @@ auto DefaultCrossoverTest::individualWithAlleleOnes() const noexcept
     return Individual(allelesOnes);
 }
 
+TEST_F(DefaultCrossoverTest, afterCrossoverPopulationHaveTheSameSize)
+{
+    std::vector<Individual> population{individualWithAlleleZeros(),
+                                       individualWithAlleleOnes()};
+    auto old_size = population.size();
+
+    DefaultCrossover sut(0.5);
+    sut.cross(population);
+
+    ASSERT_EQ(old_size, population.size());
+}
+
 TEST_F(DefaultCrossoverTest, individualsAreCrossed)
 {
-    const auto fitnessFunction = [](const Individual &i) { return 1.0; };
     std::vector<Individual> population{individualWithAlleleZeros(),
                                        individualWithAlleleOnes()};
 

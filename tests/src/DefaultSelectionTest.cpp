@@ -46,7 +46,7 @@ TEST_F(SelectionTest, populationAfterSelectionHaveTheSameSize)
     ASSERT_EQ(initialPopSize, population.size());
 }
 
-TEST_F(SelectionTest, individualsWithZeroFitnessDoNotCross)
+TEST_F(SelectionTest, individualsWithZeroFitnessAreNotSelected)
 {
     const auto fitnessFunction = getSimpleFitnessFunc();
     std::vector<Individual> population{individualWithAlleleZero(),
@@ -61,7 +61,7 @@ TEST_F(SelectionTest, individualsWithZeroFitnessDoNotCross)
     ASSERT_EQ(secondIndividualOnes, 1);
 }
 
-TEST_F(SelectionTest, individualsWithZeroFitnessDoNotCrossEvenIfThereAreMoreOfThem)
+TEST_F(SelectionTest, individualsWithZeroFitnessAreNotSelectedEvenIfThereAreMoreOfThem)
 {
     const auto fitnessFunction = getSimpleFitnessFunc();
     std::vector<Individual> population{individualWithAlleleZero(),

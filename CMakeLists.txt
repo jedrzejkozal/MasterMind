@@ -31,6 +31,7 @@ SET(TESTS_SOURCES
   ${TESTS_DIR}/DefaultMutationTest.cpp
   ${TESTS_DIR}/IndividualTest.cpp
   ${TESTS_DIR}/DefaultSelectionTest.cpp
+  ${TESTS_DIR}/DefaultCrossoverTest.cpp
 )
 
 SET(MOCKS_SOURCES
