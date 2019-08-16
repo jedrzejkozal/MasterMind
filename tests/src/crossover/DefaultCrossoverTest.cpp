@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "../../src/DefaultCrossover.hpp"
-#include "../testables/DefaultAllelesTestable.hpp"
+#include "../../../src/crossover/DefaultCrossover.hpp"
+#include "../../testables/DefaultAllelesTestable.hpp"
 
 class DefaultCrossoverTest : public testing::Test
 {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ISelectionStrategy.hpp"
-#include "Probabilistic.hpp"
+#include "../Probabilistic.hpp"
 
 class DefaultSelection : public ISelectionStrategy
 {

@@ -2,7 +2,7 @@
 #include <memory>
 
 #include "IMutationStrategy.hpp"
-#include "Probabilistic.hpp"
+#include "../Probabilistic.hpp"
 
 class DefaultMutation : public IMutationStrategy
 {

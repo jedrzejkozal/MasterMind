@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "../../src/Individual.hpp"
-#include "../../src/DefaultMutation.hpp"
+#include "../../src/mutation/DefaultMutation.hpp"
 #include "../../src/IAlleles.hpp"
 #include "../testables/DefaultAllelesTestable.hpp"
 

@@ -2,11 +2,11 @@
 
 #include <functional>
 
+#include "crossover/DefaultCrossover.hpp"
+#include "mutation/IMutationStrategy.hpp"
+#include "mutation/DefaultMutation.hpp"
+#include "selection/DefaultSelection.hpp"
 #include "Individual.hpp"
-#include "DefaultSelection.hpp"
-#include "DefaultCrossover.hpp"
-#include "IMutationStrategy.hpp"
-#include "DefaultMutation.hpp"
 #include "FitnessCalculator.hpp"
 
 class GeneticAlgorithm

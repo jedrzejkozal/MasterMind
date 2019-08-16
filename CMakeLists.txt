@@ -11,23 +11,23 @@ SET(UTILS_DIR tests/utils)
 #include_directories(${GTEST_INCLUDE_DIR})
 
 SET(PROJECT_SOURCES
+  ${PROJECT_SOURCE_DIR}/crossover/DefaultCrossover.cpp
+  ${PROJECT_SOURCE_DIR}/mutation/DefaultMutation.cpp
+  ${PROJECT_SOURCE_DIR}/selection/DefaultSelection.cpp
   ${PROJECT_SOURCE_DIR}/GeneticAlgorithm.cpp
   ${PROJECT_SOURCE_DIR}/Probabilistic.cpp
   ${PROJECT_SOURCE_DIR}/IAlleles.cpp
-  ${PROJECT_SOURCE_DIR}/DefaultMutation.cpp
   ${PROJECT_SOURCE_DIR}/Individual.cpp
-  ${PROJECT_SOURCE_DIR}/DefaultSelection.cpp
-  ${PROJECT_SOURCE_DIR}/DefaultCrossover.cpp
   ${PROJECT_SOURCE_DIR}/FitnessCalculator.cpp
 )
 
 SET(TESTS_SOURCES
   tests/main_test.cpp
-  ${TESTS_DIR}/ProbabilisticTest.cpp
-  ${TESTS_DIR}/DefaultMutationTest.cpp
+  ${TESTS_DIR}/crossover/DefaultCrossoverTest.cpp
+  ${TESTS_DIR}/mutation/DefaultMutationTest.cpp
+  ${TESTS_DIR}/selection/DefaultSelectionTest.cpp
   ${TESTS_DIR}/IndividualTest.cpp
-  ${TESTS_DIR}/DefaultSelectionTest.cpp
-  ${TESTS_DIR}/DefaultCrossoverTest.cpp
+  ${TESTS_DIR}/ProbabilisticTest.cpp
   ${TESTS_DIR}/GeneticAlgorithmTest.cpp
   ${TESTS_DIR}/FitnessCalculatorTest.cpp
 )

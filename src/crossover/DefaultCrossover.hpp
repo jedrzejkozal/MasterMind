@@ -1,5 +1,5 @@
 #include "ICrossoverStrategy.hpp"
-#include "Probabilistic.hpp"
+#include "../Probabilistic.hpp"
 
 class DefaultCrossover : public ICrossoverStrategy
 {

@@ -1,9 +1,9 @@
 #include <memory>
 
 #include "gtest/gtest.h"
-#include "../../src/DefaultMutation.hpp"
-#include "../mocks/ProbabilisticMock.hpp"
-#include "../testables/DefaultAllelesTestable.hpp"
+#include "../../../src/mutation/DefaultMutation.hpp"
+#include "../../mocks/ProbabilisticMock.hpp"
+#include "../../testables/DefaultAllelesTestable.hpp"
 
 using testing::Return;
 

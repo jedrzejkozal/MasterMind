@@ -1,6 +1,6 @@
 #include <vector>
 
-#include "Individual.hpp"
+#include "../Individual.hpp"
 
 class ICrossoverStrategy
 {

@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
-#include "../../src/DefaultSelection.hpp"
-#include "../testables/DefaultAllelesTestable.hpp"
-#include "../utils/FitnessFunctions.hpp"
-#include "../utils/Individuals.hpp"
+#include "../../../src/selection/DefaultSelection.hpp"
+#include "../../testables/DefaultAllelesTestable.hpp"
+#include "../../utils/FitnessFunctions.hpp"
+#include "../../utils/Individuals.hpp"
 
 class SelectionTest : public testing::Test
 {

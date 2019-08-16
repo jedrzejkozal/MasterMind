@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "IAlleles.hpp"
-#include "IMutationStrategy.hpp"
+#include "mutation/IMutationStrategy.hpp"
 
 class Individual
 {
