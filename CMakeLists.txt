@@ -12,15 +12,11 @@ SET(UTILS_DIR tests/utils)
 
 SET(PROJECT_SOURCES
   ${PROJECT_SOURCE_DIR}/alleles/DefaultAlleles.cpp
-  ${PROJECT_SOURCE_DIR}/crossover/DefaultCrossover.cpp
   ${PROJECT_SOURCE_DIR}/mutation/DefaultMutation.cpp
-  ${PROJECT_SOURCE_DIR}/selection/DefaultSelection.cpp
-  ${PROJECT_SOURCE_DIR}/GeneticAlgorithm.cpp
+  ${PROJECT_SOURCE_DIR}/individual/Individual.cpp
+  ${PROJECT_SOURCE_DIR}/individual/IndividualTwoAlleles.cpp
+  ${PROJECT_SOURCE_DIR}/individual/IndividualBase.cpp
   ${PROJECT_SOURCE_DIR}/Probabilistic.cpp
-  ${PROJECT_SOURCE_DIR}/Individual.cpp
-  ${PROJECT_SOURCE_DIR}/FitnessCalculator.cpp
-  ${PROJECT_SOURCE_DIR}/IndividualTwoAlleles.cpp
-  ${PROJECT_SOURCE_DIR}/IndividualBase.cpp
 )
 
 SET(TESTS_SOURCES
@@ -28,7 +24,7 @@ SET(TESTS_SOURCES
   ${TESTS_DIR}/crossover/DefaultCrossoverTest.cpp
   ${TESTS_DIR}/mutation/DefaultMutationTest.cpp
   ${TESTS_DIR}/selection/DefaultSelectionTest.cpp
-  ${TESTS_DIR}/IndividualTest.cpp
+  ${TESTS_DIR}/individual/IndividualTest.cpp
   ${TESTS_DIR}/ProbabilisticTest.cpp
   ${TESTS_DIR}/GeneticAlgorithmTest.cpp
   ${TESTS_DIR}/FitnessCalculatorTest.cpp

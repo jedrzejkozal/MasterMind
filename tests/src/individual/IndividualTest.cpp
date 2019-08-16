@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
-#include "../../src/Individual.hpp"
-#include "../../src/mutation/DefaultMutation.hpp"
-#include "../testables/DefaultAllelesTestable.hpp"
-#include "../../src/exceptions/AllelesSizeToSmallException.hpp"
+#include "../../../src/individual/Individual.hpp"
+#include "../../../src/mutation/DefaultMutation.hpp"
+#include "../../testables/DefaultAllelesTestable.hpp"
+#include "../../../src/exceptions/AllelesSizeToSmallException.hpp"
 
 TEST(IndividualTest, alllesAreModifiedDuringMutationTest)
 {

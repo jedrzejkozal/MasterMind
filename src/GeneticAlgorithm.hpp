@@ -8,7 +8,7 @@
 #include "mutation/IMutationStrategy.hpp"
 #include "mutation/DefaultMutation.hpp"
 #include "selection/DefaultSelection.hpp"
-#include "Individual.hpp"
+#include "individual/Individual.hpp"
 #include "FitnessCalculator.hpp"
 
 #include "exceptions/PopulationSizeNotEvenException.hpp"

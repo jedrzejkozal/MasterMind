@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "Probabilistic.hpp"
 
 bool Probabilistic::bernoulli(float prob) const

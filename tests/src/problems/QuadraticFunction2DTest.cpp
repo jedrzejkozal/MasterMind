@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../../../src/IndividualTwoAlleles.hpp"
+#include "../../../src/individual/IndividualTwoAlleles.hpp"
 #include "../../../src/GeneticAlgorithm.hpp"
 #include "../../utils/DecodeFromBinary.hpp"
 #include "../../utils/PrintAlleles.hpp"

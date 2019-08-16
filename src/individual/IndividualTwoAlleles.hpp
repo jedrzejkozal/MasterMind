@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "IndividualBase.hpp"
-#include "alleles/IAlleles.hpp"
+#include "../alleles/IAlleles.hpp"
 
 class IndividualTwoAlleles : public IndividualBase
 {

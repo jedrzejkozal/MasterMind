@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../testables/DefaultAllelesTestable.hpp"
-#include "../../src/Individual.hpp"
+#include "../../src/individual/Individual.hpp"
 
 Individual individualWithAlleleZero() noexcept;
 Individual individualWithAlleleOne() noexcept;

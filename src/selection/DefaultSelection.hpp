@@ -10,8 +10,7 @@ class DefaultSelection : public ISelectionStrategy<IndividualType>
 {
 public:
     DefaultSelection() = default;
-    DefaultSelection(DefaultSelection &&rhs)
-        : probabilistic(const_cast<Probabilistic &&>(std::move(rhs.probabilistic))) {}
+    DefaultSelection(DefaultSelection &&rhs);
 
     virtual void select(std::vector<IndividualType> &population) override;
 
@@ -33,6 +32,10 @@ private:
 
     const Probabilistic probabilistic;
 };
+
+template <typename IndividualType>
+DefaultSelection<IndividualType>::DefaultSelection(DefaultSelection &&rhs)
+    : probabilistic(const_cast<Probabilistic &&>(std::move(rhs.probabilistic))) {}
 
 template <typename IndividualType>
 void DefaultSelection<IndividualType>::select(std::vector<IndividualType> &population)

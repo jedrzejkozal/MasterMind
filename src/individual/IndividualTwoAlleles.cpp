@@ -1,6 +1,6 @@
 #include "IndividualTwoAlleles.hpp"
-#include "alleles/DefaultAlleles.hpp"
-#include "exceptions/AllelesSizeToSmallException.hpp"
+#include "../alleles/DefaultAlleles.hpp"
+#include "../exceptions/AllelesSizeToSmallException.hpp"
 
 IndividualTwoAlleles::IndividualTwoAlleles(const unsigned &allelesSize)
 {

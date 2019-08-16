@@ -2,14 +2,13 @@
 
 #include <vector>
 
-#include "Individual.hpp"
+#include "individual/Individual.hpp"
 
 template <typename IndividualType = Individual>
 class FitnessCalculator
 {
 public:
-    FitnessCalculator(const std::function<float(const IndividualType &)> &&fitnessFunc)
-        : fitnessFunction(std::move(fitnessFunc)) {}
+    FitnessCalculator(const std::function<float(const IndividualType &)> &&fitnessFunc);
 
     void updateFitness(std::vector<IndividualType> &population) const;
 
@@ -19,6 +18,10 @@ private:
 
     const std::function<float(const IndividualType &)> fitnessFunction;
 };
+
+template <typename IndividualType>
+FitnessCalculator<IndividualType>::FitnessCalculator(const std::function<float(const IndividualType &)> &&fitnessFunc)
+    : fitnessFunction(std::move(fitnessFunc)) {}
 
 template <typename IndividualType>
 void FitnessCalculator<IndividualType>::updateFitness(std::vector<IndividualType> &population) const

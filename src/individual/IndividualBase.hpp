@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mutation/IMutationStrategy.hpp"
+#include "../mutation/IMutationStrategy.hpp"
 
 class IndividualBase
 {

@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "../Individual.hpp"
+#include "../individual/Individual.hpp"
 
 template <typename IndividualType = Individual>
 class ISelectionStrategy

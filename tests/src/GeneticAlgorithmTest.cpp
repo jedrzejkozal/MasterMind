@@ -3,7 +3,7 @@
 #include "../../src/exceptions/PopulationSizeNotEvenException.hpp"
 #include "../../src/exceptions/PopulationSizeToSmallException.hpp"
 
-#include "../../src/IndividualTwoAlleles.hpp"
+#include "../../src/individual/IndividualTwoAlleles.hpp"
 
 TEST(GeneticAlgorithmTest, allelesHaveSpecifiedSize)
 {

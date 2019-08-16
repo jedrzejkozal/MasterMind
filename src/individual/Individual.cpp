@@ -1,6 +1,6 @@
 #include "Individual.hpp"
-#include "alleles/DefaultAlleles.hpp"
-#include "exceptions/AllelesSizeToSmallException.hpp"
+#include "../alleles/DefaultAlleles.hpp"
+#include "../exceptions/AllelesSizeToSmallException.hpp"
 
 Individual::Individual(const unsigned &allelesSize)
 {
