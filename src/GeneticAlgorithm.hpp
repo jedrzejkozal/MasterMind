@@ -7,6 +7,7 @@
 #include "DefaultCrossover.hpp"
 #include "IMutationStrategy.hpp"
 #include "DefaultMutation.hpp"
+#include "FitnessCalculator.hpp"
 
 class GeneticAlgorithm
 {
@@ -20,7 +21,7 @@ public:
         : selection(std::make_unique<DefaultSelection>()),
           crossing(std::make_unique<DefaultCrossover>(std::move(DefaultCrossover(crossoverProb)))),
           mutation(std::make_unique<DefaultMutation>(std::move(DefaultMutation(mutationProb)))),
-          fitnessFunction(std::move(fitnessFunc)),
+          fitnessCalculator(std::move(fitnessFunc)),
           stoppingFunction(std::move(stoppingFunc))
     {
         initialisePopulation(popSize, allelesSize);
@@ -54,7 +55,7 @@ private:
     std::unique_ptr<ISelectionStrategy> selection;
     std::unique_ptr<ICrossoverStrategy> crossing;
     std::unique_ptr<IMutationStrategy> mutation;
+    FitnessCalculator fitnessCalculator;
 
-    std::function<float(const Individual &)> fitnessFunction;
     std::function<bool(const float &)> stoppingFunction;
 };

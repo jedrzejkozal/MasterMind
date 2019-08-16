@@ -9,7 +9,7 @@ void GeneticAlgorithm::initialisePopulation(unsigned populationSize, unsigned al
         population.push_back(Individual(allelesSize));
         populationSize--;
     }
-    updateFitness();
+    fitnessCalculator.updateFitness(population);
 }
 
 void GeneticAlgorithm::findSolution(const unsigned &rounds)
@@ -19,19 +19,13 @@ void GeneticAlgorithm::findSolution(const unsigned &rounds)
         select();
         cross();
         mutate();
-        updateFitness();
+        fitnessCalculator.updateFitness(population);
         if (checkStoppingCondintion())
         {
             std::cout << "Early stop at iteration " << iterations << std::endl;
             break;
         }
     }
-}
-
-void GeneticAlgorithm::updateFitness()
-{
-    for (auto &individual : population)
-        individual.fitness = fitnessFunction(individual);
 }
 
 bool GeneticAlgorithm::checkStoppingCondintion() const

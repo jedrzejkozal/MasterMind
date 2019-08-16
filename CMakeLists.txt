@@ -5,8 +5,7 @@ SET(CMAKE_CXX_STANDARD 14)
 
 SET(PROJECT_SOURCE_DIR src)
 SET(TESTS_DIR tests/src)
-SET(STUBS_DIR tests/stubs)
-SET(MOCKS_DIR tests/mocks)
+SET(UTILS_DIR tests/utils)
 
 #find_package(GTest REQUIRED)
 #include_directories(${GTEST_INCLUDE_DIR})
@@ -19,6 +18,7 @@ SET(PROJECT_SOURCES
   ${PROJECT_SOURCE_DIR}/Individual.cpp
   ${PROJECT_SOURCE_DIR}/DefaultSelection.cpp
   ${PROJECT_SOURCE_DIR}/DefaultCrossover.cpp
+  ${PROJECT_SOURCE_DIR}/FitnessCalculator.cpp
 )
 
 SET(TESTS_SOURCES
@@ -29,18 +29,23 @@ SET(TESTS_SOURCES
   ${TESTS_DIR}/DefaultSelectionTest.cpp
   ${TESTS_DIR}/DefaultCrossoverTest.cpp
   ${TESTS_DIR}/GeneticAlgorithmTest.cpp
+  ${TESTS_DIR}/FitnessCalculatorTest.cpp
+)
+
+SET(TEST_PROBLEMS
   ${TESTS_DIR}/problems/SimpleQuadraticFunctionTest.cpp
 )
 
-SET(MOCKS_SOURCES
-  #${MOCKS_DIR}/ProbabilisticMock.cpp
+SET(TEST_UTILS
+  ${UTILS_DIR}/FitnessFunctions.cpp
+  ${UTILS_DIR}/Individuals.cpp
 )
 
 SET(TEST_FILES
   ${PROJECT_SOURCES}
   ${TESTS_SOURCES}
-  ${STUBS_SOURCES}
-  ${MOCKS_SOURCES}
+  ${TEST_PROBLEMS}
+  ${TEST_UTILS}
 )
 
 SET(PROGRAM_SOURCES

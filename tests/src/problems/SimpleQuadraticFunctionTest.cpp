@@ -43,10 +43,8 @@ TEST(SimpleQuadraticFunctionTest, solutionIsFoundAfter20IterationsOrLess)
     genetic.findSolution(20);
     auto best = genetic.bestIndividual();
 
-    std::cout << "alleles = ";
-    printAlleles(*best.alleles.get());
+    // printAlleles(*best.alleles.get());
     auto bestFitnessValue = quadraticFitness(best);
-    std::cout << "best fitness value = " << bestFitnessValue << std::endl;
 
     ASSERT_NEAR(961, bestFitnessValue, 0.0001);
 }

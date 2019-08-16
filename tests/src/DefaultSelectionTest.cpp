@@ -1,39 +1,15 @@
 #include "gtest/gtest.h"
 #include "../../src/DefaultSelection.hpp"
 #include "../testables/DefaultAllelesTestable.hpp"
+#include "../utils/FitnessFunctions.hpp"
+#include "../utils/Individuals.hpp"
 
 class SelectionTest : public testing::Test
 {
 public:
-    auto getSimpleFitnessFunc() const noexcept;
-    auto individualWithAlleleZero() const noexcept;
-    auto individualWithAlleleOne() const noexcept;
-
     void applyFitnessFunction(const std::function<float(const Individual &fitnessFunction)>,
                               std::vector<Individual> &population);
 };
-
-auto SelectionTest::getSimpleFitnessFunc() const noexcept
-{
-    return [](const Individual &i) {
-        auto alleles_iterators = dynamic_cast<DefaultAllelesTestable *>(i.alleles.get())->iterators();
-        return float(*std::get<0>(alleles_iterators));
-    };
-}
-
-auto SelectionTest::individualWithAlleleZero() const noexcept
-{
-    auto allelesZeros = std::make_shared<DefaultAllelesTestable>(
-        std::initializer_list<unsigned>({0}));
-    return Individual(allelesZeros);
-}
-
-auto SelectionTest::individualWithAlleleOne() const noexcept
-{
-    auto allelesOnes = std::make_shared<DefaultAllelesTestable>(
-        std::initializer_list<unsigned>({1}));
-    return Individual(allelesOnes);
-}
 
 void SelectionTest::applyFitnessFunction(const std::function<float(const Individual &)> fitnessFunction,
                                          std::vector<Individual> &population)
