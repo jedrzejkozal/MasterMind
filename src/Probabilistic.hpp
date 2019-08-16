@@ -5,11 +5,8 @@
 class Probabilistic
 {
 public:
-    Probabilistic()
-        : generator(rd()) {}
-    Probabilistic(Probabilistic &&rhs)
-        : rd(),
-          generator(std::move(rhs.generator)) {}
+    Probabilistic();
+    Probabilistic(Probabilistic &&rhs);
     virtual ~Probabilistic() = default;
 
     virtual bool bernoulli(float prob) const;

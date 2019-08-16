@@ -4,8 +4,8 @@ class DefaultAlleles : public IAlleles
 {
 public:
     DefaultAlleles(const unsigned &allelesSize,
-                   unsigned minAllelesValue,
-                   unsigned maxAllelesValue);
+                   const unsigned &minAllelesValue,
+                   const unsigned &maxAllelesValue);
     virtual ~DefaultAlleles() = default;
 
     virtual std::shared_ptr<IAlleles> copy() override;

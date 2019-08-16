@@ -1,5 +1,11 @@
 #include "Probabilistic.hpp"
 
+Probabilistic::Probabilistic()
+    : generator(rd()) {}
+Probabilistic::Probabilistic(Probabilistic &&rhs)
+    : rd(),
+      generator(std::move(rhs.generator)) {}
+
 bool Probabilistic::bernoulli(float prob) const
 {
     std::bernoulli_distribution distribution(prob);
