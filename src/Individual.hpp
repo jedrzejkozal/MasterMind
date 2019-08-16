@@ -30,6 +30,7 @@ public:
 
     void mutate(IMutationStrategy &mutation);
     void mate(Individual &lhs, const unsigned &crossingSpot);
+    unsigned allelesSize() const;
 
     std::shared_ptr<IAlleles> alleles;
     float fitness;

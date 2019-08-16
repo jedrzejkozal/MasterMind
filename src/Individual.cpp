@@ -38,3 +38,8 @@ void Individual::mate(Individual &lhs, const unsigned &crossingSpot)
     for (; firstBegin != firstEnd; firstBegin++, secondBegin++)
         std::swap(*firstBegin, *secondBegin);
 }
+
+unsigned Individual::allelesSize() const
+{
+    return alleles->size();
+}

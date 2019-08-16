@@ -9,7 +9,7 @@ TEST(DefaultCrossoverTest, afterCrossoverPopulationHaveTheSameSize)
                                        individualWithAlleleOnes()};
     auto old_size = population.size();
 
-    DefaultCrossover sut(0.5);
+    DefaultCrossover<> sut(0.5);
     sut.cross(population);
 
     ASSERT_EQ(old_size, population.size());
@@ -20,7 +20,7 @@ TEST(DefaultCrossoverTest, individualsAreCrossed)
     std::vector<Individual> population{individualWithAlleleZeros(),
                                        individualWithAlleleOnes()};
 
-    DefaultCrossover sut(1.0);
+    DefaultCrossover<> sut(1.0);
     sut.cross(population);
 
     auto firstIndividualOnes = dynamic_cast<DefaultAllelesTestable *>(population[0].alleles.get())->countOnes();
@@ -34,7 +34,7 @@ TEST(DefaultCrossoverTest, individualsAreDeletedInRightOrder)
     std::vector<Individual> population{individualWithAlleleOnes(),
                                        individualWithAlleleZeros()};
 
-    DefaultCrossover sut(1.0);
+    DefaultCrossover<> sut(1.0);
     sut.cross(population);
 
     auto firstIndividualOnes = dynamic_cast<DefaultAllelesTestable *>(population[0].alleles.get())->countOnes();
@@ -49,7 +49,7 @@ TEST(DefaultCrossoverTest, individualsAreCrossedForLargerPopulation)
                                        individualWithAlleleZeros(),
                                        individualWithAlleleZeros()};
 
-    DefaultCrossover sut(1.0);
+    DefaultCrossover<> sut(1.0);
     sut.cross(population);
 
     auto firstIndividualOnes = dynamic_cast<DefaultAllelesTestable *>(population[0].alleles.get())->countOnes();
@@ -62,7 +62,7 @@ TEST(DefaultCrossoverTest, ifCrossoverProbabilityIsZeroIndividualsAreNotChanged)
     std::vector<Individual> population{individualWithAlleleOnes(),
                                        individualWithAlleleZeros()};
 
-    DefaultCrossover sut(0.0);
+    DefaultCrossover<> sut(0.0);
     sut.cross(population);
 
     auto firstIndividualOnes = dynamic_cast<DefaultAllelesTestable *>(population[0].alleles.get())->countOnes();

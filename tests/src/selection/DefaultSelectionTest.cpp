@@ -27,7 +27,7 @@ TEST_F(SelectionTest, populationAfterSelectionHaveTheSameSize)
 
     auto initialPopSize = population.size();
 
-    DefaultSelection sut;
+    DefaultSelection<> sut;
     sut.select(population);
 
     ASSERT_EQ(initialPopSize, population.size());
@@ -40,7 +40,7 @@ TEST_F(SelectionTest, individualsWithZeroFitnessAreNotSelected)
                                        individualWithAlleleOne()};
     applyFitnessFunction(fitnessFunction, population);
 
-    DefaultSelection sut;
+    DefaultSelection<> sut;
     sut.select(population);
 
     auto firstIndividualOnes = dynamic_cast<DefaultAllelesTestable *>(population[0].alleles.get())->countOnes();
@@ -58,7 +58,7 @@ TEST_F(SelectionTest, individualsWithZeroFitnessAreNotSelectedEvenIfThereAreMore
                                        individualWithAlleleOne()};
     applyFitnessFunction(fitnessFunction, population);
 
-    DefaultSelection sut;
+    DefaultSelection<> sut;
     sut.select(population);
 
     auto firstIndividualOnes = dynamic_cast<DefaultAllelesTestable *>(population[0].alleles.get())->countOnes();

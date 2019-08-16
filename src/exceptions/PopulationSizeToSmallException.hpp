@@ -1,3 +1,5 @@
+#pragma once
+
 #include <exception>
 
 class PopulationSizeToSmallException : public std::exception

@@ -9,7 +9,7 @@ TEST(FitnessCalculatorTest, afterUpdateFitnessCallIndividualsHaveProperFitnessVa
     std::vector<Individual> population{individualWithAlleleZero(),
                                        individualWithAlleleOne()};
 
-    FitnessCalculator sut(std::move(fitnessFunction));
+    FitnessCalculator<> sut(std::move(fitnessFunction));
     sut.updateFitness(population);
 
     ASSERT_EQ(population[0].fitness, 0);
@@ -22,7 +22,7 @@ TEST(FitnessCalculatorTest, afterUpdateFitnessCallFitnessValueIsPositive)
     std::vector<Individual> population{individualWithAlleleZero(),
                                        individualWithAlleleOne()};
 
-    FitnessCalculator sut(std::move(fitnessFunction));
+    FitnessCalculator<> sut(std::move(fitnessFunction));
     sut.updateFitness(population);
 
     for (auto &indv : population)
@@ -36,7 +36,7 @@ TEST(FitnessCalculatorTest, afterUpdateFitnessCallSizeIsTheSame)
                                        individualWithAlleleOne()};
     auto populationSize = population.size();
 
-    FitnessCalculator sut(std::move(fitnessFunction));
+    FitnessCalculator<> sut(std::move(fitnessFunction));
     sut.updateFitness(population);
 
     ASSERT_EQ(populationSize, population.size());

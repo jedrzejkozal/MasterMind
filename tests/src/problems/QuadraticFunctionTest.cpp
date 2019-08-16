@@ -37,7 +37,7 @@ TEST(QuadraticFunctionTest, simpleCaseSolutionIsFoundAfter40IterationsOrLess)
     };
 
     auto stopping = [](const float &fitness) { return fitness > 960 ? true : false; };
-    auto genetic = GeneticAlgorithm(40, 5, 0.9, 0.01, quadraticFitness, stopping);
+    auto genetic = GeneticAlgorithm<Individual>(40, 5, 0.9, 0.01, quadraticFitness, stopping);
     genetic.findSolution(40);
     auto best = genetic.bestIndividual();
 
@@ -55,7 +55,7 @@ TEST(QuadraticFunctionTest, maxInMidlleOfSearchSapceSolutionIsFoundAfter40Iterat
     };
 
     auto stopping = [](const float &fitness) { return fitness > 1100 - 1 ? true : false; };
-    auto genetic = GeneticAlgorithm(40, 5, 0.9, 0.01, quadraticFitness, stopping);
+    auto genetic = GeneticAlgorithm<Individual>(40, 5, 0.9, 0.01, quadraticFitness, stopping);
     genetic.findSolution(40);
     auto best = genetic.bestIndividual();
 

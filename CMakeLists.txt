@@ -19,6 +19,7 @@ SET(PROJECT_SOURCES
   ${PROJECT_SOURCE_DIR}/Probabilistic.cpp
   ${PROJECT_SOURCE_DIR}/Individual.cpp
   ${PROJECT_SOURCE_DIR}/FitnessCalculator.cpp
+  ${PROJECT_SOURCE_DIR}/IndividualTwoAlleles.cpp
 )
 
 SET(TESTS_SOURCES

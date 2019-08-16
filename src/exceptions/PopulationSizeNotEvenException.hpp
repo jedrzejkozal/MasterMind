@@ -1,3 +1,5 @@
+#pragma once
+
 #include <exception>
 
 class PopulationSizeNotEvenException : public std::exception
