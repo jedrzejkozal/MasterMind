@@ -6,28 +6,22 @@ void DefaultCrossover::cross(std::vector<Individual> &matingPool)
 {
     std::vector<Individual> newPopulation;
     while (matingPool.size() > 0)
-    {
-        auto pair = selectPair(matingPool);
-        auto firstIndividual = matingPool[pair.first];
-        auto secondIndividual = matingPool[pair.second];
-
-        crossPair(firstIndividual, secondIndividual);
-
-        newPopulation.push_back(firstIndividual);
-        newPopulation.push_back(secondIndividual);
-
-        if (pair.first < pair.second)
-        {
-            matingPool.erase(matingPool.begin() + pair.first);
-            matingPool.erase(matingPool.begin() + pair.second - 1);
-        }
-        else
-        {
-            matingPool.erase(matingPool.begin() + pair.second);
-            matingPool.erase(matingPool.begin() + pair.first - 1);
-        }
-    }
+        addPairToNewPopulation(newPopulation, matingPool);
     matingPool = std::move(newPopulation);
+}
+
+void DefaultCrossover::addPairToNewPopulation(std::vector<Individual> &newPopulation,
+                                              std::vector<Individual> &matingPool)
+{
+    auto pair = selectPair(matingPool);
+    auto firstIndividual = matingPool[pair.first];
+    auto secondIndividual = matingPool[pair.second];
+
+    crossPair(firstIndividual, secondIndividual);
+    newPopulation.push_back(firstIndividual);
+    newPopulation.push_back(secondIndividual);
+
+    removeUsed(matingPool, pair);
 }
 
 std::pair<unsigned, unsigned> DefaultCrossover::selectPair(std::vector<Individual> &matingPool)
@@ -52,4 +46,19 @@ void DefaultCrossover::crossPair(Individual &first, Individual &second)
 bool DefaultCrossover::crossingTakesPlace()
 {
     return probabilistic.bernoulli(crossoverProbability);
+}
+
+void DefaultCrossover::removeUsed(std::vector<Individual> &matingPool,
+                                  std::pair<unsigned, unsigned> pair)
+{
+    if (pair.first < pair.second)
+    {
+        matingPool.erase(matingPool.begin() + pair.first);
+        matingPool.erase(matingPool.begin() + pair.second - 1);
+    }
+    else
+    {
+        matingPool.erase(matingPool.begin() + pair.second);
+        matingPool.erase(matingPool.begin() + pair.first - 1);
+    }
 }
