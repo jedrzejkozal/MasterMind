@@ -12,17 +12,13 @@ SET(MOCKS_DIR tests/mocks)
 #include_directories(${GTEST_INCLUDE_DIR})
 
 SET(PROJECT_SOURCES
-  #${PROJECT_SOURCE_DIR}/Color.cpp
-  #${PROJECT_SOURCE_DIR}/Grade.cpp
-  #${PROJECT_SOURCE_DIR}/Individual.cpp
-  #${PROJECT_SOURCE_DIR}/Population.cpp
+  ${PROJECT_SOURCE_DIR}/GeneticAlgorithm.cpp
   ${PROJECT_SOURCE_DIR}/Probabilistic.cpp
   ${PROJECT_SOURCE_DIR}/IAlleles.cpp
   ${PROJECT_SOURCE_DIR}/DefaultMutation.cpp
   ${PROJECT_SOURCE_DIR}/Individual.cpp
   ${PROJECT_SOURCE_DIR}/DefaultSelection.cpp
   ${PROJECT_SOURCE_DIR}/DefaultCrossover.cpp
-  ${PROJECT_SOURCE_DIR}/Population.cpp
 )
 
 SET(TESTS_SOURCES
@@ -32,6 +28,8 @@ SET(TESTS_SOURCES
   ${TESTS_DIR}/IndividualTest.cpp
   ${TESTS_DIR}/DefaultSelectionTest.cpp
   ${TESTS_DIR}/DefaultCrossoverTest.cpp
+  ${TESTS_DIR}/GeneticAlgorithmTest.cpp
+  ${TESTS_DIR}/problems/SimpleQuadraticFunctionTest.cpp
 )
 
 SET(MOCKS_SOURCES

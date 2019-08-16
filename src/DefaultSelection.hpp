@@ -6,14 +6,9 @@
 class DefaultSelection : public ISelectionStrategy
 {
 public:
-    DefaultSelection(const std::function<float(const Individual &)> fitFunc)
-        : ISelectionStrategy(fitFunc)
-    {
-    }
-
+    DefaultSelection() = default;
     DefaultSelection(DefaultSelection &&rhs)
-        : ISelectionStrategy(std::move(rhs)),
-          probabilistic(std::move(rhs.probabilistic))
+        : probabilistic(std::move(rhs.probabilistic))
     {
     }
 
@@ -24,7 +19,7 @@ private:
     std::vector<Individual> drawMatingPool(const std::vector<Individual> &population,
                                            const std::vector<float> &cumulativeProb);
 
-    std::vector<float> calcIndividualFitness(const std::vector<Individual> &population);
+    std::vector<float> getIndividualsFitness(const std::vector<Individual> &population);
     float calcVectorSum(const std::vector<float> &v);
     std::vector<float> calcSelectionProb(std::vector<float> &fitness, const float &sum);
     std::vector<float> toCumulative(std::vector<float> &SelectionProb);

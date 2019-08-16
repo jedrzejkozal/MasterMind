@@ -24,12 +24,22 @@ void DefaultAlleles::switch_allele_at(std::vector<unsigned>::iterator &iterator)
         *iterator = minAllelesValue;
 }
 
+unsigned DefaultAlleles::size() const
+{
+    return alleles.size();
+}
+
 DefaultAlleles::AllelesIterators DefaultAlleles::iterators()
 {
     return std::make_tuple(std::begin(alleles), std::end(alleles));
 }
 
-unsigned DefaultAlleles::size() const
+DefaultAlleles::AllelesConstIterators DefaultAlleles::constIterators() const
 {
-    return alleles.size();
+    return std::make_tuple(std::cbegin(alleles), std::cend(alleles));
+}
+
+DefaultAlleles::AllelesReverseIterators DefaultAlleles::reverseIterators()
+{
+    return std::make_tuple(std::rbegin(alleles), std::rend(alleles));
 }

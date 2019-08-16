@@ -11,17 +11,17 @@ void DefaultSelection::select(std::vector<Individual> &population)
 
 std::vector<float> DefaultSelection::calcCumulativeProb(const std::vector<Individual> &population)
 {
-    auto individualsFitness = calcIndividualFitness(population);
+    auto individualsFitness = getIndividualsFitness(population);
     auto fitnessSum = calcVectorSum(individualsFitness);
     auto SelectionProb = calcSelectionProb(individualsFitness, fitnessSum);
     return toCumulative(SelectionProb);
 }
 
-std::vector<float> DefaultSelection::calcIndividualFitness(const std::vector<Individual> &population)
+std::vector<float> DefaultSelection::getIndividualsFitness(const std::vector<Individual> &population)
 {
     std::vector<float> fitness;
     for (auto &individual : population)
-        fitness.push_back(fitnessFunction(individual));
+        fitness.push_back(individual.fitness);
     return fitness;
 }
 

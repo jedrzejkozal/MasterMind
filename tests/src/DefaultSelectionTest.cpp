@@ -8,6 +8,9 @@ public:
     auto getSimpleFitnessFunc() const noexcept;
     auto individualWithAlleleZero() const noexcept;
     auto individualWithAlleleOne() const noexcept;
+
+    void applyFitnessFunction(const std::function<float(const Individual &fitnessFunction)>,
+                              std::vector<Individual> &population);
 };
 
 auto SelectionTest::getSimpleFitnessFunc() const noexcept
@@ -32,15 +35,23 @@ auto SelectionTest::individualWithAlleleOne() const noexcept
     return Individual(allelesOnes);
 }
 
+void SelectionTest::applyFitnessFunction(const std::function<float(const Individual &)> fitnessFunction,
+                                         std::vector<Individual> &population)
+{
+    for (auto &indv : population)
+        indv.fitness = fitnessFunction(indv);
+}
+
 TEST_F(SelectionTest, populationAfterSelectionHaveTheSameSize)
 {
     const auto fitnessFunction = getSimpleFitnessFunc();
     std::vector<Individual> population{individualWithAlleleZero(),
                                        individualWithAlleleOne()};
+    applyFitnessFunction(fitnessFunction, population);
 
     auto initialPopSize = population.size();
 
-    DefaultSelection sut(fitnessFunction);
+    DefaultSelection sut;
     sut.select(population);
 
     ASSERT_EQ(initialPopSize, population.size());
@@ -51,8 +62,9 @@ TEST_F(SelectionTest, individualsWithZeroFitnessAreNotSelected)
     const auto fitnessFunction = getSimpleFitnessFunc();
     std::vector<Individual> population{individualWithAlleleZero(),
                                        individualWithAlleleOne()};
+    applyFitnessFunction(fitnessFunction, population);
 
-    DefaultSelection sut(fitnessFunction);
+    DefaultSelection sut;
     sut.select(population);
 
     auto firstIndividualOnes = dynamic_cast<DefaultAllelesTestable *>(population[0].alleles.get())->countOnes();
@@ -68,8 +80,9 @@ TEST_F(SelectionTest, individualsWithZeroFitnessAreNotSelectedEvenIfThereAreMore
                                        individualWithAlleleZero(),
                                        individualWithAlleleZero(),
                                        individualWithAlleleOne()};
+    applyFitnessFunction(fitnessFunction, population);
 
-    DefaultSelection sut(fitnessFunction);
+    DefaultSelection sut;
     sut.select(population);
 
     auto firstIndividualOnes = dynamic_cast<DefaultAllelesTestable *>(population[0].alleles.get())->countOnes();

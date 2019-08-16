@@ -16,6 +16,7 @@ public:
     void mate(Individual &lhs, const unsigned &crossingSpot);
 
     std::shared_ptr<IAlleles> alleles;
+    float fitness;
 
 private:
     template <typename IteratorType>
