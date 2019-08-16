@@ -50,6 +50,8 @@ private:
     void select();
     void cross();
     void updateFitness();
+    void evenPopulationSizeCheck() const;
+    void populationSizeCheck() const;
 
     std::vector<Individual> population;
     std::unique_ptr<ISelectionStrategy> selection;

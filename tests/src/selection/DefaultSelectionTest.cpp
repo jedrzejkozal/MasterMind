@@ -45,8 +45,8 @@ TEST_F(SelectionTest, individualsWithZeroFitnessAreNotSelected)
 
     auto firstIndividualOnes = dynamic_cast<DefaultAllelesTestable *>(population[0].alleles.get())->countOnes();
     auto secondIndividualOnes = dynamic_cast<DefaultAllelesTestable *>(population[1].alleles.get())->countOnes();
-    ASSERT_EQ(firstIndividualOnes, 1);
-    ASSERT_EQ(secondIndividualOnes, 1);
+    ASSERT_EQ(firstIndividualOnes, 2);
+    ASSERT_EQ(secondIndividualOnes, 2);
 }
 
 TEST_F(SelectionTest, individualsWithZeroFitnessAreNotSelectedEvenIfThereAreMoreOfThem)
@@ -66,8 +66,8 @@ TEST_F(SelectionTest, individualsWithZeroFitnessAreNotSelectedEvenIfThereAreMore
     auto thirdIndividualOnes = dynamic_cast<DefaultAllelesTestable *>(population[2].alleles.get())->countOnes();
     auto fourthIndividualOnes = dynamic_cast<DefaultAllelesTestable *>(population[3].alleles.get())->countOnes();
 
-    ASSERT_EQ(firstIndividualOnes, 1);
-    ASSERT_EQ(secondIndividualOnes, 1);
-    ASSERT_EQ(thirdIndividualOnes, 1);
-    ASSERT_EQ(fourthIndividualOnes, 1);
+    ASSERT_EQ(firstIndividualOnes, 2);
+    ASSERT_EQ(secondIndividualOnes, 2);
+    ASSERT_EQ(thirdIndividualOnes, 2);
+    ASSERT_EQ(fourthIndividualOnes, 2);
 }

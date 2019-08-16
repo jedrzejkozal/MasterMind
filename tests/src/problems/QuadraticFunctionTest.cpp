@@ -29,7 +29,7 @@ unsigned decodeFromBinary(const Individual &individual)
     return decoded;
 };
 
-TEST(QuadraticFunctionTest, simpleCaseSolutionIsFoundAfter20IterationsOrLess)
+TEST(QuadraticFunctionTest, simpleCaseSolutionIsFoundAfter40IterationsOrLess)
 {
     auto quadraticFitness = [](const Individual &individual) {
         auto x = decodeFromBinary(individual);
@@ -37,8 +37,8 @@ TEST(QuadraticFunctionTest, simpleCaseSolutionIsFoundAfter20IterationsOrLess)
     };
 
     auto stopping = [](const float &fitness) { return fitness > 960 ? true : false; };
-    auto genetic = GeneticAlgorithm(20, 5, 0.9, 0.01, quadraticFitness, stopping);
-    genetic.findSolution(20);
+    auto genetic = GeneticAlgorithm(40, 5, 0.9, 0.01, quadraticFitness, stopping);
+    genetic.findSolution(40);
     auto best = genetic.bestIndividual();
 
     // printAlleles(*best.alleles.get());
@@ -47,7 +47,7 @@ TEST(QuadraticFunctionTest, simpleCaseSolutionIsFoundAfter20IterationsOrLess)
     ASSERT_NEAR(961, bestFitnessValue, 0.0001);
 }
 
-TEST(QuadraticFunctionTest, maxInMidlleOfSearchSapceSolutionIsFoundAfter20IterationsOrLess)
+TEST(QuadraticFunctionTest, maxInMidlleOfSearchSapceSolutionIsFoundAfter40IterationsOrLess)
 {
     auto quadraticFitness = [](const Individual &individual) {
         auto x = decodeFromBinary(individual);
@@ -55,8 +55,8 @@ TEST(QuadraticFunctionTest, maxInMidlleOfSearchSapceSolutionIsFoundAfter20Iterat
     };
 
     auto stopping = [](const float &fitness) { return fitness > 1100 - 1 ? true : false; };
-    auto genetic = GeneticAlgorithm(20, 5, 0.9, 0.01, quadraticFitness, stopping);
-    genetic.findSolution(20);
+    auto genetic = GeneticAlgorithm(40, 5, 0.9, 0.01, quadraticFitness, stopping);
+    genetic.findSolution(40);
     auto best = genetic.bestIndividual();
 
     // printAlleles(*best.alleles.get());

@@ -1,6 +1,8 @@
 #include <iostream>
 
 #include "GeneticAlgorithm.hpp"
+#include "exceptions/PopulationSizeNotEvenException.hpp"
+#include "exceptions/PopulationSizeToSmallException.hpp"
 
 void GeneticAlgorithm::initialisePopulation(unsigned populationSize, unsigned allelesSize)
 {
@@ -51,11 +53,13 @@ Individual GeneticAlgorithm::bestIndividual()
 
 void GeneticAlgorithm::select()
 {
+    populationSizeCheck();
     selection->select(population);
 }
 
 void GeneticAlgorithm::cross()
 {
+    evenPopulationSizeCheck();
     crossing->cross(population);
 }
 
@@ -68,4 +72,16 @@ void GeneticAlgorithm::mutate()
 void GeneticAlgorithm::updateFitness()
 {
     fitnessCalculator.updateFitness(population);
+}
+
+void GeneticAlgorithm::populationSizeCheck() const
+{
+    if (population.size() < 2)
+        throw PopulationSizeToSmallException();
+}
+
+void GeneticAlgorithm::evenPopulationSizeCheck() const
+{
+    if (population.size() % 2 != 0)
+        throw PopulationSizeNotEvenException();
 }

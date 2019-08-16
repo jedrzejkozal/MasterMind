@@ -2,6 +2,7 @@
 #include "../../src/Individual.hpp"
 #include "../../src/mutation/DefaultMutation.hpp"
 #include "../testables/DefaultAllelesTestable.hpp"
+#include "../../src/exceptions/AllelesSizeToSmallException.hpp"
 
 TEST(IndividualTest, alllesAreModifiedDuringMutationTest)
 {
@@ -32,4 +33,15 @@ TEST(IndividualTest, defaultMutationTest)
     Individual sut(std::move(allels));
 
     sut.mutate(mutation);
+}
+
+TEST(IndividualTest, allelesSizeLessThen2ExceptionRaised)
+{
+    auto allels = std::make_shared<DefaultAlleles>(1, 0, 1);
+    Individual sut(std::move(allels));
+    ASSERT_THROW(
+        {
+            sut.mate(sut, 1);
+        },
+        AllelesSizeToSmallException);
 }

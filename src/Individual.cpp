@@ -1,5 +1,6 @@
 #include "Individual.hpp"
 #include "alleles/DefaultAlleles.hpp"
+#include "exceptions/AllelesSizeToSmallException.hpp"
 
 Individual::Individual(unsigned allelesSize)
 {
@@ -23,6 +24,8 @@ void Individual::mutate(IMutationStrategy &mutation)
 
 void Individual::mate(Individual &lhs, const unsigned &crossingSpot)
 {
+    if (alleles->size() < 2 or lhs.alleles->size() < 2)
+        throw AllelesSizeToSmallException();
     auto firstIterators = alleles->iterators();
     auto secondIterators = lhs.alleles->iterators();
     auto firstBegin = std::get<0>(firstIterators);
