@@ -1,10 +1,11 @@
 #include <iostream>
+#include <algorithm>
 
 #include "GeneticAlgorithm.hpp"
 #include "exceptions/PopulationSizeNotEvenException.hpp"
 #include "exceptions/PopulationSizeToSmallException.hpp"
 
-void GeneticAlgorithm::initialisePopulation(unsigned populationSize, unsigned allelesSize)
+void GeneticAlgorithm::initialisePopulation(unsigned populationSize, const unsigned &allelesSize)
 {
     while (populationSize > 0)
     {
@@ -32,8 +33,8 @@ void GeneticAlgorithm::findSolution(const unsigned &rounds)
 
 bool GeneticAlgorithm::checkStoppingCondintion() const
 {
-    for (const auto &ind : population)
-        if (stoppingFunction(ind.fitness))
+    for (const auto &individual : population)
+        if (stoppingFunction(individual.fitness))
             return true;
     return false;
 }

@@ -2,7 +2,7 @@
 #include "alleles/DefaultAlleles.hpp"
 #include "exceptions/AllelesSizeToSmallException.hpp"
 
-Individual::Individual(unsigned allelesSize)
+Individual::Individual(const unsigned &allelesSize)
 {
     alleles = std::make_shared<DefaultAlleles>(allelesSize, 0, 1);
 }

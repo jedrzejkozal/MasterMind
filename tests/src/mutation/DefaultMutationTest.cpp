@@ -4,20 +4,10 @@
 #include "../../../src/mutation/DefaultMutation.hpp"
 #include "../../mocks/ProbabilisticMock.hpp"
 #include "../../testables/DefaultAllelesTestable.hpp"
-
+#include "../../testables/DefaultMutationTestable.hpp"
 using testing::Return;
 
 using namespace testing;
-
-class DefaultMutationTestable : public DefaultMutation
-{
-public:
-    DefaultMutationTestable(std::shared_ptr<Probabilistic> p)
-        : DefaultMutation(0.1)
-    {
-        prob = p;
-    }
-};
 
 TEST(DefaultMutationTest, allAllelesAreSwitched)
 {

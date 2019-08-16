@@ -19,7 +19,7 @@ private:
 
     std::vector<float> getIndividualsFitness(const std::vector<Individual> &population) const;
     float calcVectorSum(const std::vector<float> &v) const noexcept;
-    std::vector<float> calcSelectionProb(std::vector<float> &fitness, const float &sum) const noexcept;
+    std::vector<float> calcSelectionProb(std::vector<float> &fitness, float &sum) const noexcept;
     std::vector<float> toCumulative(std::vector<float> &SelectionProb) const noexcept;
 
     Individual selectIndividual(const std::vector<Individual> &population,

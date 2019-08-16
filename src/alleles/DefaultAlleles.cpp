@@ -1,6 +1,6 @@
 #include "DefaultAlleles.hpp"
 
-DefaultAlleles::DefaultAlleles(unsigned allelesSize,
+DefaultAlleles::DefaultAlleles(const unsigned &allelesSize,
                                unsigned min,
                                unsigned max)
     : alleles(allelesSize, 0),

@@ -14,8 +14,8 @@ public:
 void SelectionTest::applyFitnessFunction(const std::function<float(const Individual &)> fitnessFunction,
                                          std::vector<Individual> &population)
 {
-    for (auto &indv : population)
-        indv.fitness = fitnessFunction(indv);
+    for (auto &individual : population)
+        individual.fitness = fitnessFunction(individual);
 }
 
 TEST_F(SelectionTest, populationAfterSelectionHaveTheSameSize)

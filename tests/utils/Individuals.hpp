@@ -5,3 +5,5 @@
 
 Individual individualWithAlleleZero() noexcept;
 Individual individualWithAlleleOne() noexcept;
+Individual individualWithAlleleZeros() noexcept;
+Individual individualWithAlleleOnes() noexcept;

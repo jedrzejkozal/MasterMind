@@ -25,19 +25,20 @@ std::vector<float> DefaultSelection::getIndividualsFitness(const std::vector<Ind
     return fitness;
 }
 
-float DefaultSelection::calcVectorSum(const std::vector<float> &v) const noexcept
+float DefaultSelection::calcVectorSum(const std::vector<float> &vec) const noexcept
 {
     float sum = 0.0;
-    for (auto &e : v)
-        sum += e;
-    return sum + 0.000000000001;
+    for (auto &elem : vec)
+        sum += elem;
+    return sum;
 }
 
 std::vector<float> DefaultSelection::calcSelectionProb(std::vector<float> &fitness,
-                                                       const float &sum) const noexcept
+                                                       float &sum) const noexcept
 {
-    for (auto &f : fitness)
-        f = f / sum;
+    sum += 0.000000000001;
+    for (auto &fit : fitness)
+        fit = fit / sum;
     return fitness;
 }
 

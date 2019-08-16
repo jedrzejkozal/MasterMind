@@ -1,29 +1,9 @@
 #include "gtest/gtest.h"
 #include "../../../src/crossover/DefaultCrossover.hpp"
 #include "../../testables/DefaultAllelesTestable.hpp"
+#include "../../utils/Individuals.hpp"
 
-class DefaultCrossoverTest : public testing::Test
-{
-public:
-    auto individualWithAlleleZeros() const noexcept;
-    auto individualWithAlleleOnes() const noexcept;
-};
-
-auto DefaultCrossoverTest::individualWithAlleleZeros() const noexcept
-{
-    auto allelesZeros = std::make_shared<DefaultAllelesTestable>(
-        std::initializer_list<unsigned>({0, 0, 0}));
-    return Individual(allelesZeros);
-}
-
-auto DefaultCrossoverTest::individualWithAlleleOnes() const noexcept
-{
-    auto allelesOnes = std::make_shared<DefaultAllelesTestable>(
-        std::initializer_list<unsigned>({1, 1, 1}));
-    return Individual(allelesOnes);
-}
-
-TEST_F(DefaultCrossoverTest, afterCrossoverPopulationHaveTheSameSize)
+TEST(DefaultCrossoverTest, afterCrossoverPopulationHaveTheSameSize)
 {
     std::vector<Individual> population{individualWithAlleleZeros(),
                                        individualWithAlleleOnes()};
@@ -35,7 +15,7 @@ TEST_F(DefaultCrossoverTest, afterCrossoverPopulationHaveTheSameSize)
     ASSERT_EQ(old_size, population.size());
 }
 
-TEST_F(DefaultCrossoverTest, individualsAreCrossed)
+TEST(DefaultCrossoverTest, individualsAreCrossed)
 {
     std::vector<Individual> population{individualWithAlleleZeros(),
                                        individualWithAlleleOnes()};
@@ -49,7 +29,7 @@ TEST_F(DefaultCrossoverTest, individualsAreCrossed)
     ASSERT_TRUE(secondIndividualOnes != 3);
 }
 
-TEST_F(DefaultCrossoverTest, individualsAreDeletedInRightOrder)
+TEST(DefaultCrossoverTest, individualsAreDeletedInRightOrder)
 {
     std::vector<Individual> population{individualWithAlleleOnes(),
                                        individualWithAlleleZeros()};
@@ -62,7 +42,7 @@ TEST_F(DefaultCrossoverTest, individualsAreDeletedInRightOrder)
     ASSERT_TRUE(firstIndividualOnes != 3 or secondIndividualOnes != 3);
 }
 
-TEST_F(DefaultCrossoverTest, individualsAreCrossedForLargerPopulation)
+TEST(DefaultCrossoverTest, individualsAreCrossedForLargerPopulation)
 {
     std::vector<Individual> population{individualWithAlleleOnes(),
                                        individualWithAlleleZeros(),
@@ -77,7 +57,7 @@ TEST_F(DefaultCrossoverTest, individualsAreCrossedForLargerPopulation)
     ASSERT_TRUE(firstIndividualOnes != 3 or secondIndividualOnes != 3);
 }
 
-TEST_F(DefaultCrossoverTest, ifCrossoverProbabilityIsZeroIndividualsAreNotChanged)
+TEST(DefaultCrossoverTest, ifCrossoverProbabilityIsZeroIndividualsAreNotChanged)
 {
     std::vector<Individual> population{individualWithAlleleOnes(),
                                        individualWithAlleleZeros()};

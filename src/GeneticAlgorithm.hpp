@@ -12,8 +12,8 @@
 class GeneticAlgorithm
 {
 public:
-    GeneticAlgorithm(unsigned popSize,
-                     unsigned allelesSize,
+    GeneticAlgorithm(const unsigned &popSize,
+                     const unsigned &allelesSize,
                      float crossoverProb,
                      float mutationProb,
                      const std::function<float(const Individual &)> fitnessFunc,
@@ -27,8 +27,8 @@ public:
         initialisePopulation(popSize, allelesSize);
     }
 
-    GeneticAlgorithm(unsigned popSize,
-                     unsigned allelesSize,
+    GeneticAlgorithm(const unsigned &popSize,
+                     const unsigned &allelesSize,
                      const std::function<float(const Individual &)> fitnessFunction,
                      std::unique_ptr<ICrossoverStrategy> &&crossingStrategy,
                      std::unique_ptr<IMutationStrategy> &&mutationStrategy)
@@ -44,7 +44,7 @@ public:
     Individual bestIndividual();
 
 private:
-    void initialisePopulation(unsigned populationSize, unsigned allelesSize);
+    void initialisePopulation(unsigned populationSize, const unsigned &allelesSize);
     bool checkStoppingCondintion() const;
     void mutate();
     void select();

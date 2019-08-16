@@ -3,7 +3,7 @@
 class DefaultAlleles : public IAlleles
 {
 public:
-    DefaultAlleles(unsigned allelesSize,
+    DefaultAlleles(const unsigned &allelesSize,
                    unsigned minAllelesValue,
                    unsigned maxAllelesValue);
     virtual ~DefaultAlleles() = default;

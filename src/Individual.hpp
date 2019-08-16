@@ -8,7 +8,7 @@
 class Individual
 {
 public:
-    Individual(unsigned allelesSize);
+    Individual(const unsigned &allelesSize);
     Individual(std::shared_ptr<IAlleles> allelesArg);
     Individual(const Individual &lhs);
     Individual(Individual &&rhs)
