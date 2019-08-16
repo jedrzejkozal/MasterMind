@@ -34,12 +34,15 @@ SET(TESTS_SOURCES
 )
 
 SET(TEST_PROBLEMS
-  ${TESTS_DIR}/problems/QuadraticFunctionTest.cpp
+  ${TESTS_DIR}/problems/QuadraticFunction1DTest.cpp
+  ${TESTS_DIR}/problems/QuadraticFunction2DTest.cpp
 )
 
 SET(TEST_UTILS
   ${UTILS_DIR}/FitnessFunctions.cpp
   ${UTILS_DIR}/Individuals.cpp
+  ${UTILS_DIR}/DecodeFromBinary.cpp
+  ${UTILS_DIR}/PrintAlleles.cpp
 )
 
 SET(TEST_FILES

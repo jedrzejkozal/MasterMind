@@ -5,6 +5,7 @@
 IndividualTwoAlleles::IndividualTwoAlleles(const unsigned &allelesSize)
 {
     alleles_x = std::make_shared<DefaultAlleles>(allelesSize, 0, 1);
+    alleles_y = std::make_shared<DefaultAlleles>(allelesSize, 0, 1);
 }
 
 IndividualTwoAlleles::IndividualTwoAlleles(const IndividualTwoAlleles &lhs)
