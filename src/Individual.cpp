@@ -1,4 +1,5 @@
 #include "Individual.hpp"
+#include "alleles/DefaultAlleles.hpp"
 
 Individual::Individual(unsigned allelesSize)
 {

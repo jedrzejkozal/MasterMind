@@ -5,7 +5,7 @@
 #include <tuple>
 #include <memory>
 
-#include "Probabilistic.hpp"
+#include "../Probabilistic.hpp"
 
 class IAlleles
 {
@@ -26,27 +26,4 @@ public:
     using AllelesReverseIterators = std::tuple<std::vector<unsigned>::reverse_iterator,
                                                std::vector<unsigned>::reverse_iterator>;
     virtual AllelesReverseIterators reverseIterators() = 0;
-};
-
-class DefaultAlleles : public IAlleles
-{
-public:
-    DefaultAlleles(unsigned allelesSize,
-                   unsigned minAllelesValue,
-                   unsigned maxAllelesValue);
-    virtual ~DefaultAlleles() = default;
-
-    virtual std::shared_ptr<IAlleles> copy() override;
-
-    virtual void switch_allele_at(std::vector<unsigned>::iterator &iterator) override;
-    virtual unsigned size() const override;
-
-    virtual AllelesIterators iterators() override;
-    virtual AllelesConstIterators constIterators() const override;
-    virtual AllelesReverseIterators reverseIterators() override;
-
-protected:
-    std::vector<unsigned> alleles;
-    unsigned minAllelesValue;
-    unsigned maxAllelesValue;
 };

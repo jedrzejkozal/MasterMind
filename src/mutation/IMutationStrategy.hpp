@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../IAlleles.hpp"
+#include "../alleles/IAlleles.hpp"
 
 class IMutationStrategy
 {

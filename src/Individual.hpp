@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "IAlleles.hpp"
+#include "alleles/IAlleles.hpp"
 #include "mutation/IMutationStrategy.hpp"
 
 class Individual

@@ -1,4 +1,4 @@
-#include "IAlleles.hpp"
+#include "DefaultAlleles.hpp"
 
 DefaultAlleles::DefaultAlleles(unsigned allelesSize,
                                unsigned min,

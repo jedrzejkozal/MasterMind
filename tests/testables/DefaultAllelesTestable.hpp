@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-#include "../../src/mutation/DefaultMutation.hpp"
+#include "../../src/alleles/DefaultAlleles.hpp"
 
 class DefaultAllelesTestable : public DefaultAlleles
 {

@@ -11,12 +11,12 @@ SET(UTILS_DIR tests/utils)
 #include_directories(${GTEST_INCLUDE_DIR})
 
 SET(PROJECT_SOURCES
+  ${PROJECT_SOURCE_DIR}/alleles/DefaultAlleles.cpp
   ${PROJECT_SOURCE_DIR}/crossover/DefaultCrossover.cpp
   ${PROJECT_SOURCE_DIR}/mutation/DefaultMutation.cpp
   ${PROJECT_SOURCE_DIR}/selection/DefaultSelection.cpp
   ${PROJECT_SOURCE_DIR}/GeneticAlgorithm.cpp
   ${PROJECT_SOURCE_DIR}/Probabilistic.cpp
-  ${PROJECT_SOURCE_DIR}/IAlleles.cpp
   ${PROJECT_SOURCE_DIR}/Individual.cpp
   ${PROJECT_SOURCE_DIR}/FitnessCalculator.cpp
 )
