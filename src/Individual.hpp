@@ -2,50 +2,23 @@
 
 #include <memory>
 
+#include "IndividualBase.hpp"
 #include "alleles/IAlleles.hpp"
-#include "mutation/IMutationStrategy.hpp"
 
-class Individual
+class Individual : public IndividualBase
 {
 public:
     Individual(const unsigned &allelesSize);
     Individual(std::shared_ptr<IAlleles> allelesArg);
     Individual(const Individual &lhs);
-    Individual(Individual &&rhs)
-        : alleles(std::move(rhs.alleles)),
-          fitness(std::move(fitness)) {}
-    ~Individual() = default;
-    Individual &operator=(const Individual &lhs)
-    {
-        alleles = lhs.alleles;
-        fitness = lhs.fitness;
-        return *this;
-    }
-    Individual &operator=(Individual &&rhs)
-    {
-        alleles = rhs.alleles;
-        fitness = rhs.fitness;
-        return *this;
-    }
+    Individual(Individual &&rhs);
+    virtual ~Individual() = default;
+    Individual &operator=(const Individual &lhs);
+    Individual &operator=(Individual &&rhs);
 
-    void mutate(IMutationStrategy &mutation);
-    void mate(Individual &lhs, const unsigned &crossingSpot);
-    unsigned allelesSize() const;
+    virtual void mutate(IMutationStrategy &mutation) override;
+    virtual void mate(IndividualBase &lhs, const unsigned &crossingSpot) override;
+    virtual unsigned allelesSize() const override;
 
     std::shared_ptr<IAlleles> alleles;
-    float fitness;
-
-private:
-    template <typename IteratorType>
-    void moveBeginIteratorToCrossingPoint(IteratorType &beginIterator, unsigned crossingPoint);
 };
-
-template <typename IteratorType>
-void Individual::moveBeginIteratorToCrossingPoint(IteratorType &beginIterator, unsigned crossingPoint)
-{
-    while (crossingPoint > 0)
-    {
-        beginIterator++;
-        crossingPoint--;
-    }
-}

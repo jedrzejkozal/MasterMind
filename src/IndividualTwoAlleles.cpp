@@ -14,35 +14,42 @@ IndividualTwoAlleles::IndividualTwoAlleles(const IndividualTwoAlleles &lhs)
     alleles_y = lhs.alleles_y->copy();
 }
 
+IndividualTwoAlleles::IndividualTwoAlleles(IndividualTwoAlleles &&rhs)
+    : IndividualBase(std::move(rhs)),
+      alleles_x(std::move(rhs.alleles_x)),
+      alleles_y(std::move(rhs.alleles_y)) {}
+
+IndividualTwoAlleles &IndividualTwoAlleles::operator=(const IndividualTwoAlleles &lhs)
+{
+    alleles_x = lhs.alleles_x;
+    alleles_y = lhs.alleles_y;
+    fitness = lhs.fitness;
+    return *this;
+}
+
+IndividualTwoAlleles &IndividualTwoAlleles::operator=(IndividualTwoAlleles &&rhs)
+{
+    alleles_x = rhs.alleles_x;
+    alleles_y = rhs.alleles_y;
+    fitness = rhs.fitness;
+    return *this;
+}
+
 void IndividualTwoAlleles::mutate(IMutationStrategy &mutation)
 {
     mutation.mutate(*alleles_x.get());
     mutation.mutate(*alleles_y.get());
 }
 
-void IndividualTwoAlleles::mate(IndividualTwoAlleles &lhs, const unsigned &crossingSpot)
+void IndividualTwoAlleles::mate(IndividualBase &lhs, const unsigned &crossingSpot)
 {
-    if (alleles_x->size() < 2 or lhs.alleles_x->size() < 2 or alleles_y->size() < 2 or lhs.alleles_y->size() < 2)
+    if (alleles_x->size() < 2 or
+        dynamic_cast<IndividualTwoAlleles *>(&lhs)->alleles_x->size() < 2 or
+        alleles_y->size() < 2 or
+        dynamic_cast<IndividualTwoAlleles *>(&lhs)->alleles_y->size() < 2)
         throw AllelesSizeToSmallException();
-    crossAlleles(alleles_x, lhs.alleles_x, crossingSpot);
-    crossAlleles(alleles_y, lhs.alleles_y, crossingSpot);
-}
-
-void IndividualTwoAlleles::crossAlleles(std::shared_ptr<IAlleles> &alleles,
-                                        std::shared_ptr<IAlleles> &lhsAlleles,
-                                        const unsigned &crossingSpot)
-{
-    auto firstIterators = alleles->iterators();
-    auto secondIterators = lhsAlleles->iterators();
-    auto firstBegin = std::get<0>(firstIterators);
-    auto firstEnd = std::get<1>(firstIterators);
-    auto secondBegin = std::get<0>(secondIterators);
-
-    moveBeginIteratorToCrossingPoint(firstBegin, crossingSpot);
-    moveBeginIteratorToCrossingPoint(secondBegin, crossingSpot);
-
-    for (; firstBegin != firstEnd; firstBegin++, secondBegin++)
-        std::swap(*firstBegin, *secondBegin);
+    crossAlleles(alleles_x, dynamic_cast<IndividualTwoAlleles *>(&lhs)->alleles_x, crossingSpot);
+    crossAlleles(alleles_y, dynamic_cast<IndividualTwoAlleles *>(&lhs)->alleles_y, crossingSpot);
 }
 
 unsigned IndividualTwoAlleles::allelesSize() const
