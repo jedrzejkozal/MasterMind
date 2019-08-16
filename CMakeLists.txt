@@ -33,7 +33,7 @@ SET(TESTS_SOURCES
 )
 
 SET(TEST_PROBLEMS
-  ${TESTS_DIR}/problems/SimpleQuadraticFunctionTest.cpp
+  ${TESTS_DIR}/problems/QuadraticFunctionTest.cpp
 )
 
 SET(TEST_UTILS
