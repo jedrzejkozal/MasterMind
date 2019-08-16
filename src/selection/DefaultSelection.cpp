@@ -9,7 +9,7 @@ void DefaultSelection::select(std::vector<Individual> &population)
     population = std::move(matingPool);
 }
 
-std::vector<float> DefaultSelection::calcCumulativeProb(const std::vector<Individual> &population)
+std::vector<float> DefaultSelection::calcCumulativeProb(const std::vector<Individual> &population) const
 {
     auto individualsFitness = getIndividualsFitness(population);
     auto fitnessSum = calcVectorSum(individualsFitness);
@@ -17,7 +17,7 @@ std::vector<float> DefaultSelection::calcCumulativeProb(const std::vector<Indivi
     return toCumulative(SelectionProb);
 }
 
-std::vector<float> DefaultSelection::getIndividualsFitness(const std::vector<Individual> &population)
+std::vector<float> DefaultSelection::getIndividualsFitness(const std::vector<Individual> &population) const
 {
     std::vector<float> fitness;
     for (auto &individual : population)
@@ -25,22 +25,23 @@ std::vector<float> DefaultSelection::getIndividualsFitness(const std::vector<Ind
     return fitness;
 }
 
-float DefaultSelection::calcVectorSum(const std::vector<float> &v)
+float DefaultSelection::calcVectorSum(const std::vector<float> &v) const noexcept
 {
-    float sum = 0;
+    float sum = 0.0;
     for (auto &e : v)
         sum += e;
-    return sum;
+    return sum + 0.000000000001;
 }
 
-std::vector<float> DefaultSelection::calcSelectionProb(std::vector<float> &fitness, const float &sum)
+std::vector<float> DefaultSelection::calcSelectionProb(std::vector<float> &fitness,
+                                                       const float &sum) const noexcept
 {
     for (auto &f : fitness)
         f = f / sum;
     return fitness;
 }
 
-std::vector<float> DefaultSelection::toCumulative(std::vector<float> &SelectionProb)
+std::vector<float> DefaultSelection::toCumulative(std::vector<float> &SelectionProb) const noexcept
 {
     for (auto i = 1; i < SelectionProb.size(); i++)
         SelectionProb[i] += SelectionProb[i - 1];
@@ -48,7 +49,7 @@ std::vector<float> DefaultSelection::toCumulative(std::vector<float> &SelectionP
 }
 
 std::vector<Individual> DefaultSelection::drawMatingPool(const std::vector<Individual> &population,
-                                                         const std::vector<float> &cumulativeProb)
+                                                         const std::vector<float> &cumulativeProb) const
 {
     std::vector<Individual> matingPool;
 
@@ -64,12 +65,23 @@ std::vector<Individual> DefaultSelection::drawMatingPool(const std::vector<Indiv
 }
 
 Individual DefaultSelection::selectIndividual(const std::vector<Individual> &population,
-                                              const std::vector<float> &cumulativeProb)
+                                              const std::vector<float> &cumulativeProb) const noexcept
 {
     auto rand = probabilistic.uniform_float(0, 1);
-    auto it = std::find_if(cumulativeProb.begin(), cumulativeProb.end(), [rand](const float &p) { return (rand <= p ? true : false); });
-    auto index = std::distance(cumulativeProb.begin(), it);
-    if (it == cumulativeProb.end())
-        index--;
+    auto it = std::find_if(cumulativeProb.begin(),
+                           cumulativeProb.end(),
+                           [&rand](const float &p) {
+                               return (rand <= p ? true : false);
+                           });
+    auto index = indexFromIterator(it, cumulativeProb);
     return Individual(population[index]);
+}
+
+unsigned DefaultSelection::indexFromIterator(const std::vector<float>::const_iterator &it,
+                                             const std::vector<float> &container) const noexcept
+{
+    auto index = std::distance(container.begin(), it);
+    if (it == container.end())
+        index--;
+    return index;
 }

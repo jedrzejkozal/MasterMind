@@ -5,11 +5,7 @@
 class ICrossoverStrategy
 {
 public:
-    ICrossoverStrategy(const float &crossoverProb)
-        : crossoverProbability(crossoverProb) {}
+    virtual ~ICrossoverStrategy() = default;
 
     virtual void cross(std::vector<Individual> &matingPool) = 0;
-
-protected:
-    const float crossoverProbability;
 };

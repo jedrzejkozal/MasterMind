@@ -45,11 +45,11 @@ public:
 
 private:
     void initialisePopulation(unsigned populationSize, unsigned allelesSize);
-    void updateFitness();
     bool checkStoppingCondintion() const;
     void mutate();
     void select();
     void cross();
+    void updateFitness();
 
     std::vector<Individual> population;
     std::unique_ptr<ISelectionStrategy> selection;

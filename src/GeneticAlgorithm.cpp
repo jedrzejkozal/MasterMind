@@ -19,7 +19,7 @@ void GeneticAlgorithm::findSolution(const unsigned &rounds)
         select();
         cross();
         mutate();
-        fitnessCalculator.updateFitness(population);
+        updateFitness();
         if (checkStoppingCondintion())
         {
             std::cout << "Early stop at iteration " << iterations << std::endl;
@@ -38,7 +38,7 @@ bool GeneticAlgorithm::checkStoppingCondintion() const
 
 Individual GeneticAlgorithm::bestIndividual()
 {
-    Individual best = Individual(2);
+    Individual best(2);
     float maxFitness = 0;
     for (auto &individual : population)
         if (individual.fitness > maxFitness)
@@ -63,4 +63,9 @@ void GeneticAlgorithm::mutate()
 {
     for (auto &i : population)
         i.mutate(*mutation.get());
+}
+
+void GeneticAlgorithm::updateFitness()
+{
+    fitnessCalculator.updateFitness(population);
 }
