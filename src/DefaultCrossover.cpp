@@ -32,14 +32,19 @@ void DefaultCrossover::cross(std::vector<Individual> &matingPool)
 
 std::pair<unsigned, unsigned> DefaultCrossover::selectPair(std::vector<Individual> &matingPool)
 {
-    return std::make_pair<unsigned, unsigned>(0, 1);
+    unsigned firstSelected = probabilistic.uniform_int(0, matingPool.size() - 1);
+    unsigned secondSelected = firstSelected;
+    while (secondSelected == firstSelected)
+        secondSelected = probabilistic.uniform_int(0, matingPool.size() - 1);
+
+    return std::make_pair<unsigned, unsigned>(std::move(firstSelected), std::move(secondSelected));
 }
 
 void DefaultCrossover::crossPair(Individual &first, Individual &second)
 {
     if (crossingTakesPlace())
     {
-        const auto crossingSpot = probabilistic.uniform_int(0, first.alleles->size() - 1);
+        const auto crossingSpot = probabilistic.uniform_int(1, first.alleles->size() - 1);
         first.mate(second, crossingSpot);
     }
 }

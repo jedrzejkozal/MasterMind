@@ -32,7 +32,5 @@ void Individual::mate(Individual &lhs, const unsigned &crossingSpot)
     moveBeginIteratorToCrossingPoint(secondBegin, crossingSpot);
 
     for (; firstBegin != firstEnd; firstBegin++, secondBegin++)
-    {
         std::swap(*firstBegin, *secondBegin);
-    }
 }
