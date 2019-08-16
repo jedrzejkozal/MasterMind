@@ -53,12 +53,10 @@ std::vector<Individual> DefaultSelection::drawMatingPool(const std::vector<Indiv
 {
     std::vector<Individual> matingPool;
 
-    for (auto i = 0; i < population.size(); i += 2)
+    while (matingPool.size() < population.size())
     {
-        auto firstIndividual = selectIndividual(population, cumulativeProb);
-        auto secondIndividual = selectIndividual(population, cumulativeProb);
-        matingPool.push_back(std::move(firstIndividual));
-        matingPool.push_back(std::move(secondIndividual));
+        auto individual = selectIndividual(population, cumulativeProb);
+        matingPool.push_back(std::move(individual));
     }
 
     return matingPool;
