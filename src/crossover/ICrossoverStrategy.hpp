@@ -1,0 +1,12 @@
+#include <vector>
+
+#include "../individual/Individual.hpp"
+
+template <typename IndividualType = Individual>
+class ICrossoverStrategy
+{
+public:
+    virtual ~ICrossoverStrategy() = default;
+
+    virtual void cross(std::vector<IndividualType> &matingPool) = 0;
+};
