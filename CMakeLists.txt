@@ -35,6 +35,7 @@ SET(TEST_PROBLEMS
   ${TESTS_DIR}/problems/QuadraticFunction2DTest.cpp
   ${TESTS_DIR}/problems/LocalMaxTest.cpp
   ${TESTS_DIR}/problems/TwoEqualMaxTest.cpp
+  ${TESTS_DIR}/problems/CosTest.cpp
 )
 
 SET(TEST_UTILS
