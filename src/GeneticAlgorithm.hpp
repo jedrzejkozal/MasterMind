@@ -18,19 +18,21 @@ template <typename IndividualType = Individual>
 class GeneticAlgorithm
 {
 public:
+    template <typename... IndividualConstructorArgs>
     GeneticAlgorithm(const unsigned &popSize,
                      const unsigned &allelesSize,
                      float crossoverProb,
                      float mutationProb,
                      const std::function<float(const IndividualType &)> fitnessFunc,
-                     const std::function<bool(const float &)> stoppingFunc = [](const float &fitness) { return false; })
+                     const std::function<bool(const float &)> stoppingFunc = [](const float &fitness) { return false; },
+                     IndividualConstructorArgs... args)
         : selection(std::make_unique<DefaultSelection<IndividualType>>()),
           crossing(std::make_unique<DefaultCrossover<IndividualType>>(std::move(DefaultCrossover<IndividualType>(crossoverProb)))),
           mutation(std::make_unique<DefaultMutation>(std::move(DefaultMutation(mutationProb)))),
           fitnessCalculator(std::move(fitnessFunc)),
           stoppingFunction(std::move(stoppingFunc))
     {
-        initialisePopulation(popSize, allelesSize);
+        initialisePopulation(popSize, allelesSize, args...);
     }
 
     GeneticAlgorithm(const unsigned &popSize,
@@ -50,7 +52,10 @@ public:
     IndividualType bestIndividual();
 
 private:
-    void initialisePopulation(unsigned populationSize, const unsigned &allelesSize);
+    template <typename... IndividualConstructorArgs>
+    void initialisePopulation(unsigned populationSize,
+                              const unsigned &allelesSize,
+                              IndividualConstructorArgs... args);
     bool checkStoppingCondintion() const;
     void mutate();
     void select();
@@ -69,11 +74,14 @@ private:
 };
 
 template <typename IndividualType>
-void GeneticAlgorithm<IndividualType>::initialisePopulation(unsigned populationSize, const unsigned &allelesSize)
+template <typename... IndividualConstructorArgs>
+void GeneticAlgorithm<IndividualType>::initialisePopulation(unsigned populationSize,
+                                                            const unsigned &allelesSize,
+                                                            IndividualConstructorArgs... args)
 {
     while (populationSize > 0)
     {
-        population.push_back(IndividualType(allelesSize));
+        population.push_back(IndividualType(allelesSize, args...));
         populationSize--;
     }
     fitnessCalculator.updateFitness(population);

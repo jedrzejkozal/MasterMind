@@ -7,6 +7,13 @@ Individual::Individual(const unsigned &allelesSize)
     alleles = std::make_shared<DefaultAlleles>(allelesSize, 0, 1);
 }
 
+Individual::Individual(const unsigned &allelesSize,
+                       const unsigned &min,
+                       const unsigned &max)
+{
+    alleles = std::make_shared<DefaultAlleles>(allelesSize, min, max);
+}
+
 Individual::Individual(std::shared_ptr<IAlleles> allelesArg)
     : alleles(allelesArg) {}
 

@@ -9,6 +9,9 @@ class Individual : public IndividualBase
 {
 public:
     Individual(const unsigned &allelesSize);
+    Individual(const unsigned &allelesSize,
+               const unsigned &min,
+               const unsigned &max);
     Individual(std::shared_ptr<IAlleles> allelesArg);
     Individual(const Individual &lhs);
     Individual(Individual &&rhs);

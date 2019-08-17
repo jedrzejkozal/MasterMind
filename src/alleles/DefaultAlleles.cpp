@@ -7,9 +7,9 @@ DefaultAlleles::DefaultAlleles(const unsigned &allelesSize,
       minAllelesValue(min),
       maxAllelesValue(max)
 {
-    Probabilistic p;
+    Probabilistic probabilistic;
     for (auto it = alleles.begin(); it != alleles.end(); it++)
-        *it = p.uniform_int(minAllelesValue, maxAllelesValue);
+        *it = probabilistic.uniform_int(minAllelesValue, maxAllelesValue);
 }
 
 std::shared_ptr<IAlleles> DefaultAlleles::copy()
