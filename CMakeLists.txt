@@ -33,6 +33,8 @@ SET(TESTS_SOURCES
 SET(TEST_PROBLEMS
   ${TESTS_DIR}/problems/QuadraticFunction1DTest.cpp
   ${TESTS_DIR}/problems/QuadraticFunction2DTest.cpp
+  ${TESTS_DIR}/problems/LocalMaxTest.cpp
+  ${TESTS_DIR}/problems/TwoEqualMaxTest.cpp
 )
 
 SET(TEST_UTILS
