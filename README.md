@@ -40,7 +40,7 @@ In this equation we sum over the sequences from previous rounds. Number of balls
 
 Here simple genetic algorithm was used. Selection is based on the fitness from previous section. Crossover is done by selecting random spot in the sequence, and exchanging the alleles after this spot. Mutation is switching gene to next possible value with low probability.
 
-Population size was 1000. Probability of crossover was 0.95 and probability of mutation 0.01.
+Population size was 1000. Probability of crossover was 0.95 and probability of mutation 0.05.
 
 ## Sample gameplay
 
