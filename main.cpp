@@ -26,16 +26,15 @@ std::vector<unsigned> drawSequence(const unsigned short &sequenceLength)
     return sequence;
 }
 
-auto evaluateSequence(std::vector<unsigned>::iterator sequenceBegin,
-                      std::vector<unsigned>::iterator sequenceEnd,
-                      std::vector<unsigned> correctsequence)
+auto evaluateSequence(std::vector<unsigned> sequence,
+                      std::vector<unsigned> sequenceToGuess)
 {
     std::vector<bool> usedPlace(8, false);
     unsigned i = 0, correctPlace = 0, correctColor = 0;
 
-    for (auto it = sequenceBegin; it != sequenceEnd; it++)
+    for (auto it = sequence.cbegin(); it != sequence.cend(); it++)
     {
-        if (correctsequence[i] == *it)
+        if (sequenceToGuess[i] == *it)
         {
             correctPlace++;
             usedPlace[i] = true;
@@ -43,9 +42,9 @@ auto evaluateSequence(std::vector<unsigned>::iterator sequenceBegin,
         i++;
     }
 
-    for (auto it = sequenceBegin; it != sequenceEnd; it++)
-        for (unsigned i = 0; i < correctsequence.size(); i++)
-            if (*it == correctsequence[i] and not usedPlace[i])
+    for (auto it = sequence.cbegin(); it != sequence.cend(); it++)
+        for (unsigned i = 0; i < sequenceToGuess.size(); i++)
+            if (*it == sequenceToGuess[i] and not usedPlace[i])
             {
                 correctColor++;
                 usedPlace[i] = true;
@@ -69,19 +68,57 @@ void printSequence(std::tuple<std::vector<unsigned>::iterator, std::vector<unsig
         std::cout << *it;
 }
 
+std::vector<unsigned> individualToSequence(const Individual individual)
+{
+    std::vector<unsigned> sequence;
+    auto iterators = individual.alleles->constIterators();
+    auto cbegin = std::get<0>(iterators);
+    auto cend = std::get<1>(iterators);
+    for (auto it = cbegin; it != cend; it++)
+        sequence.push_back(*it);
+    return sequence;
+}
+
+void drawRandomSequence(std::vector<std::vector<unsigned>> &proposedSequences,
+                        std::vector<unsigned> &proposedCorrectPlaces,
+                        std::vector<unsigned> &proposedCorrectColors,
+                        const unsigned &sequenceLength,
+                        const std::vector<unsigned> sequenceToGuess)
+{
+    Individual individual(sequenceLength, 0, 8);
+    auto sequence = individualToSequence(individual);
+
+    proposedSequences.push_back(sequence);
+    auto correctBalls = evaluateSequence(sequence, sequenceToGuess);
+    proposedCorrectPlaces.push_back(correctBalls.first);
+    proposedCorrectColors.push_back(correctBalls.second);
+}
+
 int main()
 {
     const unsigned short sequenceLength = 6;
-    auto sequence = drawSequence(sequenceLength);
+    auto sequenceToGuess = drawSequence(sequenceLength);
 
-    auto mastermindFitness = [&sequence](const Individual &individual) {
-        auto iterators = individual.alleles.get()->iterators();
-        auto begin = std::get<0>(iterators);
-        auto end = std::get<1>(iterators);
+    std::vector<std::vector<unsigned>> proposedSequences;
+    std::vector<unsigned> proposedCorrectPlaces;
+    std::vector<unsigned> proposedCorrectColors;
 
-        auto correct = evaluateSequence(begin, end, sequence);
+    drawRandomSequence(proposedSequences, proposedCorrectPlaces, proposedCorrectColors,
+                       sequenceLength, sequenceToGuess);
 
-        return 2 * correct.first + correct.second;
+    auto mastermindFitness = [&proposedSequences, &proposedCorrectPlaces, &proposedCorrectColors](const Individual &individual) {
+        auto sequence = individualToSequence(individual);
+        // auto correctBalls = evaluateSequence(sequence, sequenceToGuess);
+
+        float fitness = 0;
+        for (auto i = 0; i < proposedSequences.size(); i++)
+        {
+            auto correctBalls = evaluateSequence(sequence, proposedSequences[i]);
+            fitness -= 2 * abs(proposedCorrectPlaces[i] - correctBalls.first);
+            fitness -= abs(proposedCorrectColors[i] - correctBalls.second);
+        }
+
+        return fitness;
     };
     auto stopping = [](const float &fitness) { return fitness > 12 - 1 ? true : false; };
 
@@ -89,18 +126,33 @@ int main()
                                                 mastermindFitness,
                                                 stopping,
                                                 0, 8);
-    genetic.findSolution(100);
-    auto best = genetic.bestIndividual();
-
     std::cout << "sequence to guess = ";
-    printSequence(sequence);
-    std::cout << std::endl
-              << "genetic algorithm sequence = ";
-    printSequence(best.alleles.get()->iterators());
+    printSequence(sequenceToGuess);
     std::cout << std::endl;
+    unsigned round = 1;
 
-    float bestFitnessValue = mastermindFitness(best);
-    std::cout << "bestFitnessValue = " << bestFitnessValue << std::endl;
+    while (proposedCorrectPlaces.back() != sequenceLength)
+    {
+        genetic.findSolution(1);
+        auto best = genetic.bestIndividual();
+        auto sequence = individualToSequence(best);
 
+        std::cout << "round " << round << std::endl;
+        round++;
+        std::cout
+            << "genetic algorithm sequence = ";
+        printSequence(best.alleles.get()->iterators());
+        std::cout << std::endl;
+
+        float bestFitnessValue = mastermindFitness(best);
+        std::cout << "fitnessValue = " << bestFitnessValue << std::endl
+                  << std::endl;
+
+        auto correctBalls = evaluateSequence(sequence, sequenceToGuess);
+
+        proposedSequences.push_back(sequence);
+        proposedCorrectPlaces.push_back(correctBalls.first);
+        proposedCorrectColors.push_back(correctBalls.second);
+    }
     return 0;
 }
