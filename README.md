@@ -3,7 +3,7 @@ Genetic algorithm playing Mastermind.
 
 ## What is mastermind
 
-Mastermind is a game for 2 players. First one chooses a sequence of 6 colorful balls (with acceptable repeatable colors). In this variant of the game we have 9 colors:
+Mastermind is a game for 2 players. One is codemaker and chooses a sequence of 6 colorful balls (with acceptable repeatable colors). In this variant of the game we have 9 colors:
 * white
 * red
 * green
@@ -16,9 +16,9 @@ Mastermind is a game for 2 players. First one chooses a sequence of 6 colorful b
 
 This sequence is a secret, and second player does not know it.
 
-Second players tries to guess the sequence by proposing the sequence. The first player compares the secret sequence and the proposal. He gives back the number of balls with the correct color on the right place, and the number of balls with the correct color but on a wrong place. Thats one round of the game. Based on this two numbers second player can make another guess in next round.
+Second players is codebreaker and tries to guess the sequence by proposing the sequence. Codemaker compares the secret sequence and the proposal. He gives the number of balls with the correct color on the right place, and the number of balls with the correct color but on a wrong place. If codebreaker correctly guessed the sequence game ends. If not, based on this two numbers codebreaker can make another guess in next round.
 
-Game ends when a second player guess the sequence or when he fails to do it in 10 turns.
+Game ends when the codebreaker guess the sequence or when he fails to do it in 10 turns.
 
 Here is an example of physical board game looks like:
 
@@ -54,6 +54,15 @@ Sequences proposed by genetic algorithm:
 
 In first 4 rounds there is more exploration. This is due to the character of fitness information. It gives more information as the game goes on. In the last 4 rounds algorithm was improving the best solution. First, second and the last ball did not changed.
 
-In this game genetic algorithm won according to the rules. Implemented algorithm can find the solution for any sequence, but most of the times it fails to do it in the 10 rounds. The mean number of rounds needed to find a random sequence was     (for 1000 independent trials). 
+## Win rate
+
+In previous section game with low number of rounds was chosen (its easier to present and analyse). In this game genetic algorithm won according to the rules. Implemented algorithm can find the solution for any sequence, but most of the times it fails to do so in the 10 rounds. The mean number of rounds needed to find a random sequence was 16.131 (for 1000 independent trials). Here is histogram plotted from all 1000 trials:
+
+![](readme/histogram.png)
+
+Win rate is 6.4%. This is low, but it can be improved. Number of trials needed to find a solution is approximately gaussian with few outliers at the right side of histogram. We can use this when optimizing the algorithm performance. 
 
 Algorithm performance can be improved by more careful fine tuning of the parameters. One can think of random search for this. Also We can tweak a little a fitness function. Another approach may be introducing more complicated genetic operators, and more sophisticated selection, crossover or mutation. Implementation is flexible and allows to exchange any of this elements. 
+
+## Acknowledgement
+This repo is based on the work available in http://pawel.stawarz.net.pl/files/Pawel_Stawarz-Zastosowanie_algorytmow_ewolucyjnych_w_grach_logicznych.pdf.

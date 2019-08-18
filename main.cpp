@@ -81,7 +81,7 @@ void drawRandomSequence(std::vector<std::vector<unsigned>> &proposedSequences,
     proposedCorrectColors.push_back(correctBalls.second);
 }
 
-int main()
+unsigned experiment()
 {
     const unsigned short sequenceLength = 6;
     auto sequenceToGuess = drawSequence(sequenceLength);
@@ -138,5 +138,25 @@ int main()
         proposedCorrectPlaces.push_back(correctBalls.first);
         proposedCorrectColors.push_back(correctBalls.second);
     }
+    return round + 1;
+}
+
+int main()
+{
+    float numberOfTrials = 1000;
+    float sum = 0;
+    std::vector<unsigned> rounds;
+
+    for (int i = 0; i < numberOfTrials; i++)
+    {
+        auto r = experiment();
+        sum += r;
+        rounds.push_back(r);
+    }
+    std::cout << "[ ";
+    for (auto it = rounds.cbegin(); it != rounds.cend(); it++)
+        std::cout << *it << ", ";
+    std::cout << "]" << std::endl
+              << "mean rounds = " << sum / numberOfTrials << std::endl;
     return 0;
 }
