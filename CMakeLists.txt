@@ -7,8 +7,6 @@ SET(PROJECT_SOURCE_DIR src)
 SET(TESTS_DIR tests/src)
 SET(UTILS_DIR tests/utils)
 
-#find_package(GTest REQUIRED)
-#include_directories(${GTEST_INCLUDE_DIR})
 
 SET(PROJECT_SOURCES
   ${PROJECT_SOURCE_DIR}/alleles/DefaultAlleles.cpp

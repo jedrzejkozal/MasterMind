@@ -2,19 +2,6 @@
 
 #include "src/GeneticAlgorithm.hpp"
 
-// enum color
-// {
-//     white = 0,
-//     red = 1,
-//     green = 2,
-//     purple = 3,
-//     turquoise = 4,
-//     gray = 5,
-//     blue = 6,
-//     yellow = 7,
-//     black = 8
-// };
-
 std::vector<unsigned> drawSequence(const unsigned short &sequenceLength)
 {
     std::vector<unsigned> sequence;
