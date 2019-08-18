@@ -108,8 +108,6 @@ int main()
 
     auto mastermindFitness = [&proposedSequences, &proposedCorrectPlaces, &proposedCorrectColors](const Individual &individual) {
         auto sequence = individualToSequence(individual);
-        // auto correctBalls = evaluateSequence(sequence, sequenceToGuess);
-
         float fitness = 0;
         for (auto i = 0; i < proposedSequences.size(); i++)
         {
@@ -122,7 +120,7 @@ int main()
     };
     auto stopping = [](const float &fitness) { return fitness > 12 - 1 ? true : false; };
 
-    auto genetic = GeneticAlgorithm<Individual>(100, sequenceLength, 0.9, 0.01,
+    auto genetic = GeneticAlgorithm<Individual>(1000, sequenceLength, 0.95, 0.05,
                                                 mastermindFitness,
                                                 stopping,
                                                 0, 8);
@@ -139,8 +137,7 @@ int main()
 
         std::cout << "round " << round << std::endl;
         round++;
-        std::cout
-            << "genetic algorithm sequence = ";
+        std::cout << "genetic algorithm sequence = ";
         printSequence(best.alleles.get()->iterators());
         std::cout << std::endl;
 
